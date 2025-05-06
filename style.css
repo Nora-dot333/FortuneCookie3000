@@ -1,0 +1,21 @@
+*{
+    font-family: "Port Lligat Sans", sans-serif;
+    /*font-weight: 400;*/
+    font-style: normal;
+    color: black;
+    text-decoration:none;
+
+    /* Lea's drei Must-Haves */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Modak', sans-serif;
+  }
+
+
+
+/* F99D90 */
+
