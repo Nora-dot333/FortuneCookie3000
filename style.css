@@ -13,9 +13,28 @@
 
   h1, h2, h3 {
     font-family: 'Modak', system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  h1, h2 {
+    color: #fcecdf;
+    text-shadow: 
+    -1px -1px 0 black,
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black,
+     0px  1px 0 black,
+     0px -1px 0 black,
+     1px  0px 0 black,
+    -1px  0px 0 black;
+  }
+
+  body {
+    background-color: #F99D90;
   }
 
 
 
-/* F99D90 */
+
 
