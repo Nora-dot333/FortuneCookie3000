@@ -19,9 +19,6 @@
     font-family: 'Modak', system-ui;
     font-weight: 400;
     font-style: normal;
-  }
-
-  h1, h2 {
     color: #fcecdf;
     text-shadow: 
     -1px -1px 0 black,
@@ -35,10 +32,7 @@
   }
 
   
-
-  .buttonnav {
-    font-family: 'Modak', system-ui;
-  }
+  /*.buttonnav { } */
   
 
 header, footer {
