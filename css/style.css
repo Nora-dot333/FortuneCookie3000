@@ -36,6 +36,12 @@
 
   
 
+  .buttonnav {
+    font-family: 'Modak', system-ui;
+  }
+  
 
-
+header, footer {
+  background-color: #EB7A6A;
+}
 
