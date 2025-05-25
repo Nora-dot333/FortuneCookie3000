@@ -131,6 +131,7 @@ footer {
   padding: 3rem 0;
 }
 
+/* Textboxen Text Starter- & Resumepage*/
 .info-box {
   background-color: white;
   padding: 2rem;
@@ -165,7 +166,7 @@ footer {
   width: 90%;
   margin-bottom: 15rem;
 }
-
+/* Container für CTA-Buttons Starter- & Resumepage */
 .button-container {
   position: absolute;
   right: -5.5rem;
@@ -174,7 +175,7 @@ footer {
   transform: translateY(20%);
   margin-top: 0;
 }
-
+/* Styling Get Started-Button */
 .getstarted-button {
   margin-top: 1rem;
   padding: 2rem 2.5rem;
@@ -194,7 +195,7 @@ footer {
   color: white;
   font-size: 2.6rem;
 }
-
+/* Styling Resume-Button */
 .resume-button {
   margin-top: 1rem;
   padding: 2rem 2.5rem;
