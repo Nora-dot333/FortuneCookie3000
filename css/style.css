@@ -15,7 +15,7 @@
     overflow-x: hidden;
   }
 
-  h1, h2, h3 {
+  h1 {
     font-family: 'Modak', system-ui;
     font-weight: 400;
     font-style: normal;
@@ -29,6 +29,7 @@
      0px -1px 0 black,
      1px  0px 0 black,
     -1px  0px 0 black;
+    font-size: 8rem;
   }
 
 img {
@@ -61,7 +62,6 @@ img {
  main {
   display: contents; /*macht das section direkte Kinder von grid und nicht main */
 }
-
 
   nav {
     border-bottom: 2px solid #000000;
@@ -124,21 +124,27 @@ margin: 2rem 2rem 0 2rem;
     border-bottom:2px solid #F8F0EB;
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
-    gap: 3rem;
+   
   }
 
   .imgcookies{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 3rem;
+    gap: 2rem;
   }
 
   .imgcookies img {
-    width: 25%;
+    width: 30%;
+    transition: transform 0.3s ease;
   }
   
+  .imgcookies:hover{
+    transform: scale(1.2);
+  }
+
   /*
 
   .Calender { }
