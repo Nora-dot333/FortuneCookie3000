@@ -35,6 +35,7 @@ img {
   max-width: 100%;
   display: inline-block;
   height: auto;
+  background-color: transparent !important;
 }
 
 
@@ -87,7 +88,11 @@ img {
 } 
 
 
+
+
 .headerhomepage {
+display: flex;
+align-items: center;
 
 }
 
