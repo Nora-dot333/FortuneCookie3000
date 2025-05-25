@@ -130,3 +130,50 @@ footer {
   background-color: #eb7a6a;
   padding: 3rem 0;
 }
+
+.infopages {
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.info-box {
+  background-color: white;
+  padding-left: 5%;
+  padding-right: 5%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  line-height: 1.4;
+  font-size: 2rem;
+}
+
+.info-box.left {
+  align-self: flex-start;
+}
+
+.info-box.right {
+  align-self: flex-end;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.getstarted-button {
+  margin-top: 1rem;
+  padding: 2rem 2.5rem;
+  background-color: #ee6a43;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+
+.getstarted-button h1 {
+  color: white;
+}
