@@ -87,15 +87,20 @@ img {
   justify-content: center;
 } 
 
-
-
-
 .headerhomepage {
 display: flex;
 align-items: center;
 
 }
 
+.mainlogo {
+  width: 75%;
+  height: 50%;
+}
+
+.getlucky {
+  
+}
 
   
   .bodystarterpage {
