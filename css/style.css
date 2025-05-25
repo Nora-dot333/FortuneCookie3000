@@ -11,6 +11,10 @@
     box-sizing: border-box;
   }
 
+  html {
+    overflow-x: hidden;
+  }
+
   h1, h2, h3 {
     font-family: 'Modak', system-ui;
     font-weight: 400;
@@ -27,6 +31,12 @@
     -1px  0px 0 black;
   }
 
+img {
+  max-width: 100%;
+  display: inline-block;
+  height: auto;
+}
+
 
   body {
   background: #F99D90;
@@ -41,6 +51,7 @@
       "main"
       "footer";
     min-height: 100vh; /* damit die Seite die volle Höhe hat */
+    max-width: 100%;
   }
   
   nav    { grid-area: nav; }
@@ -48,6 +59,15 @@
   main   { grid-area: main; }
   footer { grid-area: footer; }
 
+
+  nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0;
+  max-width: 100%;
+}
 
 .buttonnav { 
   background-color: #F8F0EB; 
@@ -57,9 +77,19 @@
   max-width: 500px;
   height: 3vh;
   max-height: 250px;
-  text-align: center;
   font-weight: bold;
+  cursor: pointer;               
+  user-select: none;             /* Verhindert Markieren/Kopieren */
+  transition: background-color 0.3s ease; /*Hover*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
 } 
+
+
+.headerhomepage {
+
+}
 
 
   
