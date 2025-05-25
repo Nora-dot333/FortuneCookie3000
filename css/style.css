@@ -86,11 +86,15 @@ img {
   font-weight: bold;
   cursor: pointer;               
   user-select: none;             /* Verhindert Markieren/Kopieren */
-  transition: background-color 0.3s ease; /*Hover*/
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.3s ease; /*Hover*/
 } 
+
+.buttonnav:hover {
+ background-color:rgba(0, 0, 0, 0.3); 
+}
 
 .headerhomepage {
 display: flex;
