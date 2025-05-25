@@ -47,7 +47,7 @@ img {
 
   .whole_grid{
     display: grid;
-    grid-template-rows: 5% 30% 30% 30% 5%; /* 5 Reihen */
+    grid-template-rows: 5% 1fr 1fr 1fr 5%; /* 5 Reihen */
     grid-template-areas:
       "nav"
       "header"
@@ -56,7 +56,6 @@ img {
       "footer";
     min-height: 100vh;
     max-width: 100%;
-    gap: 10px;
   }
   
  main {
@@ -65,6 +64,9 @@ img {
 
   nav {
     border-bottom: 2px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   nav ul {
@@ -101,15 +103,17 @@ img {
 display: flex;
 flex-direction: column;
 align-items: center;
-margin: 2rem 2rem 0 2rem;
+justify-content: center;
+
 }
 
 .mainlogo {
-  margin-bottom: -90px;
+  margin-bottom: -100px;
+  width: 85%;
 }
 
 .getlucky {
-  margin-top: -90px;
+  margin-top: -100px;
   width: 80%;
   height: 60%;
 }
@@ -138,10 +142,13 @@ margin: 2rem 2rem 0 2rem;
 
   .imgcookies img {
     width: 30%;
-    transition: transform 0.3s ease;
+  }
+
+  #leftcookie, #middlecookie, #rightcookie {
+     transition: transform 0.3s ease;
   }
   
-  .imgcookies:hover{
+  #leftcookie:hover, #middlecookie:hover, #rightcookie:hover{
     transform: scale(1.2);
   }
 
@@ -151,14 +158,26 @@ margin: 2rem 2rem 0 2rem;
   
   */
   
+
+
+
 footer{ 
   border-top: 2px solid #000000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 50%;
+  padding: 10px;
+
+}
+
+footer img {
+  width: 8rem;
 }
 
 nav, footer {
   background-color: #EB7A6A;
-  padding: 3rem 0;
-}
+ }
 
 
 
