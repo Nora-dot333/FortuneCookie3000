@@ -41,6 +41,7 @@ img {
 
   body {
   background: #F99D90;
+  font-size: 1.7rem;
   }
 
   .whole_grid {
@@ -69,7 +70,7 @@ img {
   list-style: none;
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 6rem;
   margin: 0;
   max-width: 100%;
 }
@@ -78,10 +79,10 @@ img {
   background-color: #F8F0EB; 
   border: 2px solid #9F1C2E;    
   border-radius: 30px;  /* Runde Ecken */
-  width: 10vw;
+  width: 17vw;
   max-width: 500px;
-  height: 3vh;
-  max-height: 250px;
+  height: 5vh;
+  max-height: 300px;
   font-weight: bold;
   cursor: pointer;               
   user-select: none;             /* Verhindert Markieren/Kopieren */
@@ -95,11 +96,16 @@ img {
 display: flex;
 flex-direction: column;
 align-items: center;
-margin: 2rem;
+margin: 2rem 2rem 0 2rem;
+}
+
+.mainlogo {
+  margin-bottom: -90px;
 }
 
 .getlucky {
-  width: 75%;
+  margin-top: -80px;
+  width: 80%;
   height: 60%;
 }
 
