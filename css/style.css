@@ -11,14 +11,6 @@
     box-sizing: border-box;
   }
 
-  body {
-  background: #F99D90;
-  }
-
-  .bodystarterpage {
-    background-color: #FBCB77;
-  }
-
   h1, h2, h3 {
     font-family: 'Modak', system-ui;
     font-weight: 400;
@@ -35,8 +27,44 @@
     -1px  0px 0 black;
   }
 
+
+  body {
+  background: #F99D90;
+  }
+
+  .whole_grid {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+      "nav"
+      "header"
+      "main"
+      "footer";
+    min-height: 100vh; /* damit die Seite die volle Höhe hat */
+  }
   
-  /*.buttonnav { } */
+  nav    { grid-area: nav; }
+  header { grid-area: header; }
+  main   { grid-area: main; }
+  footer { grid-area: footer; }
+
+
+.buttonnav { 
+  
+} 
+
+
+  
+  .bodystarterpage {
+    background-color: #FBCB77;
+  }
+
+  
+  /*
+
+  .Calender { }
+  .FortuneCookies { }
+  */
   
 
 nav, footer {
