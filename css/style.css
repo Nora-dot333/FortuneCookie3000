@@ -44,22 +44,23 @@ img {
   font-size: 1.7rem;
   }
 
-  .whole_grid {
+  .whole_grid{
     display: grid;
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: 5% 30% 30% 30% 5%; /* 5 Reihen */
     grid-template-areas:
       "nav"
       "header"
-      "main"
+      "fortunecookies"
+      "Calender"
       "footer";
-    min-height: 100vh; /* damit die Seite die volle Höhe hat */
+    min-height: 100vh;
     max-width: 100%;
+    gap: 10px;
   }
   
-  nav    { grid-area: nav; }
-  header { grid-area: header; }
-  main   { grid-area: main; }
-  footer { grid-area: footer; }
+ main {
+  display: contents; /*macht das section direkte Kinder von grid und nicht main */
+}
 
 
   nav {
@@ -104,25 +105,44 @@ margin: 2rem 2rem 0 2rem;
 }
 
 .mainlogo {
-  margin-bottom: -120px;
+  margin-bottom: -90px;
 }
 
 .getlucky {
-  margin-top: -120px;
+  margin-top: -90px;
   width: 80%;
   height: 60%;
 }
-
   
   .bodystarterpage {
     background-color: #FBCB77;
   }
 
+  .FortuneCookies { 
+    background-color: #9F1C2E;
+    border-top:2px solid #F8F0EB;
+    border-bottom:2px solid #F8F0EB;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .imgcookies{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 3rem;
+  }
+
+  .imgcookies img {
+    width: 25%;
+  }
   
   /*
 
   .Calender { }
-  .FortuneCookies { }
+  
   */
   
 footer{ 
