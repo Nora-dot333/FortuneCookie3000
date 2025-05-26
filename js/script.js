@@ -1,6 +1,12 @@
 console.log("hoi script.js");
+
+//////////////////Animaton bzw. Event CTA-Buttons//////////////////
+
+//////////////////Fetch and Store APIs und aktuelles Datum//////////////////
+
 // Was wir brauchen aus den Daten:
 //Link zu Quotes South Park, Game of Thrones und Advice Slip API
+// Aktuelles Datum
 
 //Aktuelles Datum (Aktueller Tag)
 const today = new Date();
@@ -9,8 +15,6 @@ console.log(formattedDate);
 
 // Speichere das Datum des letzten Speicherns im Local Storage
 localStorage.setItem("quotes_saved_date", formattedDate);
-
-/////////////Fetch and Store APIs//////////////
 
 ///Hilfsfunktion
 async function loadQuote(url) {

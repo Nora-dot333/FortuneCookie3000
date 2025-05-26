@@ -1,7 +1,4 @@
 console.log("hoi script.js");
-// Was wir brauchen aus den Daten:
-//Link zu Quotes South Park, Game of Thrones und Advice Slip API
-
 // Prüfen ob Nutzer bereits auf Website war und nicht bereits auf index.html ist
 if (
   localStorage.getItem("visited") &&
