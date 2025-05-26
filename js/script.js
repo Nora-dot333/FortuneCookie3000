@@ -22,8 +22,8 @@ document
   .addEventListener("click", startExperience);
 console.log("Event Listener für Get-Started-Button wurde gesetzt");
 
-//Fetch API
-const url = "https://api.adviceslip.com/advice";
+//Fetch APIs
+const url = "https://southparkquotes.onrender.com/v1/quotes/3";
 try {
   const response = await fetch(url);
   const data = await response.json();
@@ -31,3 +31,23 @@ try {
 } catch (error) {
   console.error(error);
 }
+
+//Fetch API Southpark
+/*const apiUrlsp = "https://southparkquotes.onrender.com/v1/quotes/3";
+//Einzelnes Zitat abrufen und speichern
+fetch(apiUrlsp)
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("API Response:", data);
+    if (Array.isArray(data) && data.length > 0) {
+      const selectedQuote = data[0]; //Erstes Zitat wählen
+      localStorage.setItem("quote", JSON.stringify(selectedQuote));
+      console.log("Gespeichertes Zitat:", selectedQuote);
+    } else {
+      console.error("Keine gültigen Zitate erhalten.");
+    }
+  })
+  .catch((error) => console.error("Fehler beim Abrufen der API:", error));*/
+
+// eine funktion machen loadquote
+// mehrere javascripts machen
