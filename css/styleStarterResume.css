@@ -189,6 +189,10 @@ footer {
   align-items: center;
   justify-content: center;
   text-align: center;
+  transition: background-color 0.3s ease; /*Hover*/
+}
+.getstarted-button:hover {
+  background-color: #b15236;
 }
 
 .getstarted-button h1 {
@@ -209,6 +213,10 @@ footer {
   align-items: center;
   justify-content: center;
   text-align: center;
+  transition: background-color 0.3s ease; /*Hover*/
+}
+.resume-button:hover {
+  background-color: #6f1524;
 }
 
 .resume-button h1 {
