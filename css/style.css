@@ -40,7 +40,7 @@ body {
 
 .whole_grid {
   display: grid;
-  grid-template-rows: 10% 50% 50% 50% 10%; /* 5 Reihen */
+  grid-template-rows: 130px 100vh 100vh 100vh 130px; /* 5 Reihen */
   grid-template-areas:
     "nav"
     "header"
@@ -101,7 +101,7 @@ nav ul {
 
 .mainlogo {
   margin-bottom: -100px;
-  width: 85%;
+  width: 80vw;
 }
 
 .getlucky {
@@ -163,7 +163,8 @@ footer {
 }
 
 footer img {
-  width: 8rem;
+  width: 10rem;
+  height: 8rem;
 }
 
 nav,
