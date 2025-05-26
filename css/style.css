@@ -129,6 +129,7 @@ nav ul {
   flex-direction: row;
   justify-content: center;
   gap: 2rem;
+  position: relative;
 }
 
 .imgcookies img {
@@ -171,3 +172,5 @@ nav,
 footer {
   background-color: #eb7a6a;
 }
+
+/* CSS für JavaScript - Cookie Breaks*/

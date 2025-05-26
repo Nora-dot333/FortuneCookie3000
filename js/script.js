@@ -1,6 +1,6 @@
 console.log("hoi script.js");
 
-//////////////////Animaton bzw. Event CTA-Buttons//////////////////
+/////////////////////Animaton bzw. Event CTA-Buttons/////////////////////////
 
 //////////////////Fetch and Store APIs und aktuelles Datum//////////////////
 
@@ -70,3 +70,5 @@ if (savedDate !== formattedDate) {
   console.log("Quote Advice:", quote2);
   console.log("Quote South Park:", quote3);
 }
+
+///////////////////////////////Cookie Breaks ////////////////////////////////
