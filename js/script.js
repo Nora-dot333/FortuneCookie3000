@@ -62,7 +62,7 @@ if (savedDate !== formattedDate) {
   loadandStoreQuotes();
 } else {
   // Quotes wurden heute bereits gespeichert – lade sie aus localStorage
-  const quote1 = localStorage.getItem("quote_got");
+  const quote1 = localStorage.getItem("quote_GoT");
   const quote2 = localStorage.getItem("quote_advice");
   const quote3 = localStorage.getItem("quote_southpark");
 
@@ -122,12 +122,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Zeige die zerbrochenen Hälften
       const leftHalf = document.createElement("img");
-      leftHalf.src = "img/FortuneCookieLeft2.svg";
+      leftHalf.src = "img/FortuneCookieLeft.svg";
       leftHalf.alt = "Linke Hälfte";
       leftHalf.className = "cookie-half left";
 
       const rightHalf = document.createElement("img");
-      rightHalf.src = "img/FortuneCookieRight2.svg";
+      rightHalf.src = "img/FortuneCookieRight.svg";
       rightHalf.alt = "Rechte Hälfte";
       rightHalf.className = "cookie-half right";
 

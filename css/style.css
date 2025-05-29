@@ -130,7 +130,7 @@ nav ul {
   justify-content: center;
   gap: 2rem;
   position: relative;
-  height: 300px;
+  height: 100vh;
 }
 
 .imgcookies img {
@@ -229,8 +229,8 @@ footer {
 }
 
 .cookie-half {
-  width: 30%;
-  height: 100%;
+  width: 15%;
+
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
