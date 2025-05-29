@@ -94,8 +94,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Klone das Cookie-Bild als neues Element zur Animation
       const animatedCookie = cookie.cloneNode(true);
-      animatedCookie.classList.add("cookie-break");
+      animatedCookie.style.position = "absolute";
+      animatedCookie.style.top = "50%";
+      animatedCookie.style.left = "50%";
+      animatedCookie.style.transform = "translate(-50%, -50%)";
+      animatedCookie.style.zIndex = "10";
+      animatedCookie.style.width = "30%"; // gleiche Größe wie Original
       container.appendChild(animatedCookie);
+
+      // Animation je nach Cookie-ID zuweisen
+      if (id === "leftcookie") {
+        animatedCookie.style.animation = "leftToCenter 0.7s ease forwards";
+      } else if (id === "rightcookie") {
+        animatedCookie.style.animation = "rightToCenter 0.7s ease forwards";
+      } else if (id === "middlecookie") {
+        animatedCookie.style.animation = "middlePop 0.6s ease forwards";
+      }
 
       // Originale Cookies entfernen/verstecken
       cookie.style.visibility = "hidden";
