@@ -72,3 +72,55 @@ if (savedDate !== formattedDate) {
 }
 
 ///////////////////////////////Cookie Breaks ////////////////////////////////
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Script läuft – Fortune Cookie Animation Etappe 1");
+
+  const cookieIds = ["leftcookie", "middlecookie", "rightcookie"];
+  const container = document.getElementById("cookie-container");
+
+  cookieIds.forEach((id) => {
+    const cookie = document.getElementById(id);
+
+    cookie.addEventListener("click", async () => {
+      console.log(`Geklickt: ${id}`);
+
+      // Alle anderen Cookies ausblenden
+      cookieIds.forEach((otherId) => {
+        if (otherId !== id) {
+          const otherCookie = document.getElementById(otherId);
+          if (otherCookie) otherCookie.style.visibility = "hidden";
+        }
+      });
+
+      // Klone das Cookie-Bild als neues Element zur Animation
+      const animatedCookie = cookie.cloneNode(true);
+      animatedCookie.classList.add("cookie-break");
+      container.appendChild(animatedCookie);
+
+      // Originale Cookies entfernen/verstecken
+      cookie.style.visibility = "hidden";
+
+      // Warte auf Animationsende
+      await new Promise((resolve) => setTimeout(resolve, 700));
+
+      // Entferne das animierte Cookie-Bild
+      animatedCookie.remove();
+
+      // Zeige die zerbrochenen Hälften
+      const leftHalf = document.createElement("img");
+      leftHalf.src = "img/FortuneCookieLeft2.svg";
+      leftHalf.alt = "Linke Hälfte";
+      leftHalf.className = "cookie-half left";
+
+      const rightHalf = document.createElement("img");
+      rightHalf.src = "img/FortuneCookieRight2.svg";
+      rightHalf.alt = "Rechte Hälfte";
+      rightHalf.className = "cookie-half right";
+
+      container.appendChild(leftHalf);
+      container.appendChild(rightHalf);
+
+      console.log("Cookie zerbrochen!");
+    });
+  });
+});
