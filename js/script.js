@@ -135,6 +135,51 @@ document.addEventListener("DOMContentLoaded", () => {
       container.appendChild(rightHalf);
 
       console.log("Cookie zerbrochen!");
+
+      // Schritt 1: Hole das zugehörige Quote aus dem LocalStorage
+      let quoteText = "";
+      if (id === "leftcookie") {
+        const quote = JSON.parse(localStorage.getItem("quote_GoT"));
+        quoteText = quote?.sentence || quote?.character?.name || "Zitat fehlt.";
+      } else if (id === "middlecookie") {
+        const quote = JSON.parse(localStorage.getItem("quote_advice"));
+        quoteText = quote?.slip?.advice || "Zitat fehlt.";
+      } else if (id === "rightcookie") {
+        const quote = JSON.parse(localStorage.getItem("quote_southpark"));
+        quoteText = quote?.quote || "Zitat fehlt.";
+      }
+
+      // Schritt 2: Erstelle den Zettel (fortune-paper)
+      const paper = document.createElement("div");
+      paper.className = "fortune-paper";
+      paper.textContent = ""; // zuerst leer
+      container.appendChild(paper);
+
+      // Schritt 3: Setze Breite dynamisch basierend auf Textlänge
+      // (nur grobe Schätzung, du kannst statisch lassen, wenn gewünscht)
+      const paperWidth = Math.min(
+        quoteText.length * 8 + 100,
+        window.innerWidth * 0.6
+      );
+      paper.style.width = `${paperWidth}px`;
+
+      // Schritt 4: Positioniere Cookie-Hälften passend weiter auseinander
+      const cookieHalfOffset = leftHalf.offsetWidth / 2 || 100;
+      const cookieHalfrightOffset = 115;
+      leftHalf.style.left = `calc(50% - ${
+        paperWidth / 2 + cookieHalfOffset
+      }px)`;
+      rightHalf.style.right = `calc(50% - ${
+        paperWidth / 2 + cookieHalfrightOffset
+      }px)`;
+
+      // Schritt 5: Quote erscheint 1.5s nach Zettel-Erscheinen
+      setTimeout(() => {
+        const quoteTextElem = document.createElement("div");
+        quoteTextElem.className = "fortune-text";
+        quoteTextElem.textContent = quoteText;
+        paper.appendChild(quoteTextElem);
+      }, 50);
     });
   });
 });
