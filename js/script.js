@@ -121,15 +121,25 @@ document.addEventListener("DOMContentLoaded", () => {
       animatedCookie.remove();
 
       // Zeige die zerbrochenen Hälften
-      const leftHalf = document.createElement("img");
+      /*const leftHalf = document.createElement("img");
       leftHalf.src = "img/FortuneCookieLeft.svg";
       leftHalf.alt = "Linke Hälfte";
-      leftHalf.className = "cookie-half left";
+      leftHalf.className = "cookie-half animate-left";
 
       const rightHalf = document.createElement("img");
       rightHalf.src = "img/FortuneCookieRight.svg";
       rightHalf.alt = "Rechte Hälfte";
-      rightHalf.className = "cookie-half right";
+      rightHalf.className = "cookie-half animate-right"; */
+
+      const leftHalf = document.createElement("img");
+      leftHalf.src = "img/FortuneCookieLeft.svg";
+      leftHalf.alt = "Linke Hälfte";
+      leftHalf.className = "cookie-half";
+
+      const rightHalf = document.createElement("img");
+      rightHalf.src = "img/FortuneCookieRight.svg";
+      rightHalf.alt = "Rechte Hälfte";
+      rightHalf.className = "cookie-half";
 
       container.appendChild(leftHalf);
       container.appendChild(rightHalf);
@@ -164,22 +174,46 @@ document.addEventListener("DOMContentLoaded", () => {
       paper.style.width = `${paperWidth}px`;
 
       // Schritt 4: Positioniere Cookie-Hälften passend weiter auseinander
-      const cookieHalfOffset = leftHalf.offsetWidth / 2 || 100;
+      /*const cookieHalfOffset = leftHalf.offsetWidth / 2 || 100;
       const cookieHalfrightOffset = 115;
       leftHalf.style.left = `calc(50% - ${
         paperWidth / 2 + cookieHalfOffset
       }px)`;
       rightHalf.style.right = `calc(50% - ${
         paperWidth / 2 + cookieHalfrightOffset
-      }px)`;
+      }px)`; */
 
-      // Schritt 5: Quote erscheint 1.5s nach Zettel-Erscheinen
-      setTimeout(() => {
-        const quoteTextElem = document.createElement("div");
-        quoteTextElem.className = "fortune-text";
-        quoteTextElem.textContent = quoteText;
-        paper.appendChild(quoteTextElem);
-      }, 50);
+      // Schritt 4: Warte auf Rendering, um tatsächliche Breite zu bekommen
+      requestAnimationFrame(() => {
+        const paperActualWidth = paper.offsetWidth;
+
+        // Linke Hälfte links vom Zettel positionieren
+        leftHalf.style.left = `calc(50% - ${paperActualWidth / 2}px)`;
+        leftHalf.style.transform = `translate(-100%, -50%) rotate(-20deg)`;
+
+        // Rechte Hälfte rechts vom Zettel positionieren
+        rightHalf.style.left = `calc(50% + ${paperActualWidth / 2}px)`;
+        rightHalf.style.transform = `translate(0%, -50%) rotate(20deg)`;
+
+        /* // Schritt 4: Setze CSS-Variable --offset dynamisch für Animation
+      const offset = Math.min(paperWidth / 2 + 290, 390); // max 120px
+      const offsetr = Math.min(paperWidth / 2 + 50);
+
+      leftHalf.style.setProperty("--offset", `${offset}px`);
+      rightHalf.style.setProperty("--offset", `${offsetr}px`); */
+
+        // Start Animation
+        leftHalf.classList.add("animate-left");
+        rightHalf.classList.add("animate-right");
+
+        // Schritt 5: Quote erscheint 1.5s nach Zettel-Erscheinen
+        setTimeout(() => {
+          const quoteTextElem = document.createElement("div");
+          quoteTextElem.className = "fortune-text";
+          quoteTextElem.textContent = quoteText;
+          paper.appendChild(quoteTextElem);
+        }, 50);
+      });
     });
   });
 });

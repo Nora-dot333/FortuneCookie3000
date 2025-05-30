@@ -177,26 +177,6 @@ footer {
 
 /* CSS für JavaScript - Cookie Breaks*/
 
-/* .cookie-break {
-  position: absolute;
-  width: 30%;
-  z-index: 10;
-  animation: moveToCenter 0.6s forwards;
-}
-
-@keyframes moveToCenter {
-  0% {
-    left: 0;
-    top: 0;
-    transform: translate(0, 0);
-  }
-  100% {
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(1.2);
-  }
-} */
-
 @keyframes leftToCenter {
   0% {
     transform: translate(-150%, -50%) rotate(-15deg);
@@ -228,24 +208,106 @@ footer {
   }
 }
 
-.cookie-half {
+/*.cookie-half {
   width: 15%;
-
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 9;
   pointer-events: none;
+  opacity: 1;
+}*/
+
+.cookie-half {
+  width: 15%;
+  position: absolute;
+  top: 50%;
+  left: 50%; /* Beide starten bei 50% links */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Zentriert das Element genau in der Mitte */
+  z-index: 9;
+  pointer-events: none;
+  opacity: 1; /* Sichtbar machen */
+  transition: transform 1.2s ease;
 }
 
+/*@keyframes cookieSplitLeft {
+  0% {
+    transform: translateX(0) translateY(-50%) rotate(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-180%) translateY(-50%) rotate(-20deg);
+    opacity: 1;
+  }
+}
+
+@keyframes cookieSplitRight {
+  0% {
+    transform: translateX(0) translateY(-50%) rotate(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(180%) translateY(-50%) rotate(20deg);
+    opacity: 1;
+  }
+} */
+
+@keyframes cookieSplitLeft {
+  0% {
+    transform: translate(-50%, -50%) rotate(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(calc(-50% - var(--offset, 100px)), -50%) rotate(-20deg);
+    opacity: 1;
+  }
+}
+
+@keyframes cookieSplitRight {
+  0% {
+    transform: translate(-50%, -50%) rotate(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--offset, 100px)), -50%) rotate(20deg);
+    opacity: 1;
+  }
+}
+
+/*
 .cookie-half.left {
   left: 20%;
 }
 
 .cookie-half.right {
   right: 20%;
+} */
+
+/* Diese Klassen werden im JS hinzugefügt */
+/*.cookie-half.animate-left {
+  animation: cookieSplitLeft 1.2s ease forwards;
+  left: 50%;
 }
 
+.cookie-half.animate-right {
+  animation: cookieSplitRight 1.2s ease forwards;
+  right: 50%;
+} */
+
+/* Animation für linke Hälfte */
+.cookie-half.animate-left {
+  animation: cookieSplitLeft 1.2s ease forwards;
+}
+
+/* Animation für rechte Hälfte */
+.cookie-half.animate-right {
+  animation: cookieSplitRight 1.2s ease forwards;
+}
+
+/* Animierter Zettel */
 .fortune-paper {
   position: absolute;
   top: 50%;
@@ -262,12 +324,14 @@ footer {
   align-items: center;
   justify-content: center;
   text-align: center;
-  animation: slideOutPaper 0.7s ease forwards;
+  opacity: 0;
+  animation: growPaper 1.2s ease forwards;
+  animation-delay: 0.3s;
 }
 
-@keyframes slideOutPaper {
+@keyframes growPaper {
   0% {
-    transform: translate(-50%, -50%) scaleX(0);
+    transform: translate(-50%, -50%) scaleX(0.1);
     opacity: 0;
   }
   100% {
