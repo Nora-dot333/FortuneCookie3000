@@ -13,9 +13,8 @@ const today = new Date();
 const formattedDate = today.toLocaleDateString("de-DE"); // deutscher Stil
 console.log(formattedDate);
 
-// Speichere das Datum des letzten Speicherns im Local Storage
+ // Speichere das Datum des letzten Speicherns im Local Storage
 localStorage.setItem("quotes_saved_date", formattedDate);
-
 
 ///Hilfsfunktion
 async function loadQuote(url) {
@@ -39,7 +38,7 @@ async function loadandStoreQuotes() {
   const quotes_3 = await loadQuote(
     "https://southparkquotes.onrender.com/v1/quotes/3"
   ); //SouthPark
-  //const quote_3 = await quotes_3[0];
+  const quote_3 = await quotes_3[0];
   
   
   if (quote_1) {
@@ -58,6 +57,7 @@ async function loadandStoreQuotes() {
     console.log("South Park gespeichert:", quote_3);
   }
 
+
 }
 
 //Hole aktuelles Datum aus Local Storage
@@ -66,7 +66,7 @@ const savedDate = localStorage.getItem("quotes_saved_date");
 // Prüfen, ob Quotes schon für heute gespeichert wurden
 if (savedDate !== formattedDate) {
   loadandStoreQuotes();
-} else {
+   } else {
   // Quotes wurden heute bereits gespeichert – lade sie aus localStorage
   const quote1 = localStorage.getItem("quote_GoT");
   const quote2 = localStorage.getItem("quote_advice");
@@ -74,8 +74,10 @@ if (savedDate !== formattedDate) {
 
   console.log("Quote GoT:", quote1);
   console.log("Quote Advice:", quote2);
-  console.log("Quote South Park:", quote3);
+  console.log("Quote South Park:", quote3);  
 }
+
+
 
 ///////////////////////////////Cookie Breaks ////////////////////////////////
 document.addEventListener("DOMContentLoaded", () => {
