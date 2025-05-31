@@ -28,16 +28,39 @@ async function loadQuote(url) {
   ///Hauptfunktion Fetch and Store APIs
 }
 async function loadandStoreQuotes() {
-  const quote_1 = await loadQuote(
+  const quote_1_data = await loadQuote(
     "https://api.gameofthronesquotes.xyz/v1/random"
   ); //GameofThrones
-  const quote_2 = await loadQuote("https://api.adviceslip.com/advice"); //AdviceSlip
-  const quotes_3 = await loadQuote(
+  const quote_2_data = await loadQuote("https://api.adviceslip.com/advice"); //AdviceSlip
+  const quotes_3_data = await loadQuote(
     "https://southparkquotes.onrender.com/v1/quotes/3"
   ); //SouthPark
-  const quote_3 = await quotes_3[0];
+ 
+
+  //Speichert nur Text der Quotes und nicht ganzes Objekt als String
+  const quote_1 = quote_1_data?.sentence;
+  const quote_2 = quote_2_data?.slip?.advice;
+  const quote_3 = quotes_3_data?.[0]?.quote;
+  
+  /*const quote_3 = await quotes_3[0];*/
 
   if (quote_1) {
+    localStorage.setItem("quote_GoT", quote_1);
+    console.log("Game of Thrones gespeichert:", quote_1);
+  }
+
+  if (quote_2) {
+    localStorage.setItem("quote_advice", quote_2);
+    console.log("Advice gespeichert:", quote_2);
+  }
+
+  if (quote_3) {
+    const quote_3 = quotes_3[0];
+    localStorage.setItem("quote_southpark", quote_3); 
+    console.log("South Park gespeichert:", quote_3);
+  }
+
+  /*if (quote_1) {
     localStorage.setItem("quote_GoT", JSON.stringify(quote_1));
     console.log("Game of Thrones gespeichert:", quote_1);
   }
@@ -51,7 +74,7 @@ async function loadandStoreQuotes() {
     const quote_3 = quotes_3[0];
     localStorage.setItem("quote_southpark", JSON.stringify(quote_3));
     console.log("South Park gespeichert:", quote_3);
-  }
+  } */
 }
 
 //Hole aktuelles Datum aus Local Storage
@@ -149,13 +172,13 @@ document.addEventListener("DOMContentLoaded", () => {
       // Schritt 1: Hole das zugehörige Quote aus dem LocalStorage
       let quoteText = "";
       if (id === "leftcookie") {
-        const quote = JSON.parse(localStorage.getItem("quote_GoT"));
+        const quote = localStorage.getItem("quote_GoT");
         quoteText = quote?.sentence || quote?.character?.name || "Zitat fehlt.";
       } else if (id === "middlecookie") {
-        const quote = JSON.parse(localStorage.getItem("quote_advice"));
+        const quote = localStorage.getItem("quote_advice");
         quoteText = quote?.slip?.advice || "Zitat fehlt.";
       } else if (id === "rightcookie") {
-        const quote = JSON.parse(localStorage.getItem("quote_southpark"));
+        const quote = localStorage.getItem("quote_southpark");
         quoteText = quote?.quote || "Zitat fehlt.";
       }
 
