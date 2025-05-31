@@ -173,13 +173,13 @@ document.addEventListener("DOMContentLoaded", () => {
       let quoteText = "";
       if (id === "leftcookie") {
         const quote = localStorage.getItem("quote_GoT");
-        quoteText = quote?.sentence || quote?.character?.name || "Zitat fehlt.";
+        quoteText = quote || "Zitat fehlt.";
       } else if (id === "middlecookie") {
         const quote = localStorage.getItem("quote_advice");
-        quoteText = quote?.slip?.advice || "Zitat fehlt.";
+        quoteText = quote || "Zitat fehlt.";
       } else if (id === "rightcookie") {
         const quote = localStorage.getItem("quote_southpark");
-        quoteText = quote?.quote || "Zitat fehlt.";
+        quoteText = quote || "Zitat fehlt.";
       }
 
       // Schritt 2: Erstelle den Zettel (fortune-paper)
