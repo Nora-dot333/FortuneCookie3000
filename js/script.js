@@ -1,5 +1,41 @@
 console.log("hoi script.js");
 
+///////////////////////////////// Löschung alter Quotes bei Monatswechsel /////////////////////////////////////////
+
+function cleanUpOldQuotesIfNeeded() {
+  const today = new Date();
+  const currentMonth = today.getMonth() + 1;
+  const currentYear = today.getFullYear();
+  const monthKey = `${String(currentMonth).padStart(2, "0")}.${currentYear}`;
+
+  const lastCleanup = localStorage.getItem("last_quote_cleanup");
+
+  if (lastCleanup === monthKey) return; // Schon bereinigt
+
+  Object.keys(localStorage).forEach((key) => {
+    const match = key.match(/^quote_.*_(\d{2})\.(\d{2})\.(\d{4})$/);
+    if (match) {
+      const [_, day, month, year] = match;
+      const isCurrentMonth = parseInt(month) === currentMonth && parseInt(year) === currentYear;
+      if (!isCurrentMonth) {
+        localStorage.removeItem(key);
+        console.log(`Entfernt: ${key}`);
+      }
+    }
+  });
+
+  let dates = JSON.parse(localStorage.getItem("quote_dates")) || [];
+  const filteredDates = dates.filter((dateStr) => {
+    const [day, month, year] = dateStr.split(".");
+    return parseInt(month) === currentMonth && parseInt(year) === currentYear;
+  });
+
+  localStorage.setItem("quote_dates", JSON.stringify(filteredDates));
+  localStorage.setItem("last_quote_cleanup", monthKey); // Cleanup merken
+  console.log("Alte Quotes und Datumswerte bereinigt.");
+}
+
+
 /////////////////////Animaton bzw. Event CTA-Buttons/////////////////////////
 
 //////////////////Fetch and Store APIs und aktuelles Datum//////////////////
@@ -12,9 +48,6 @@ console.log("hoi script.js");
 const today = new Date();
 const formattedDate = today.toLocaleDateString("de-DE"); // deutscher Stil
 console.log(formattedDate);
-
- /* Speichere das Datum des letzten Speicherns im Local Storage -> früher nun in Array speichern
-localStorage.setItem("quotes_saved_date", formattedDate);*/
 
 
 //Überprüfung, ob am heutigen Datum bereits Quotes abgespeichert
