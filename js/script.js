@@ -16,6 +16,32 @@ console.log(formattedDate);
  // Speichere das Datum des letzten Speicherns im Local Storage
 localStorage.setItem("quotes_saved_date", formattedDate);
 
+
+//Überprüfung, ob an diesem entsprechenden Datum bereits Quotes abgespeichert
+function quotesAreValidForToday() {
+  const savedDate = localStorage.getItem("quotes_saved_date");
+  if (savedDate !== formattedDate) return false;
+
+  try {
+    const quote1 = JSON.parse(localStorage.getItem("quote_GoT"));
+    const quote2 = JSON.parse(localStorage.getItem("quote_advice"));
+    const quote3 = JSON.parse(localStorage.getItem("quote_southpark"));
+
+    if (!quote1 || !quote2 || !quote3) return false;
+
+    // einfache Gültigkeitschecks
+    if (!quote1.sentence) return false;
+    if (!quote2.slip?.advice) return false;
+    if (!quote3.quote) return false;
+
+    return true; // alle vorhanden & valide
+  } catch (e) {
+    return false; // Parsing-Fehler => ungültig
+  }
+}
+
+
+
 ///Hilfsfunktion
 async function loadQuote(url) {
   try {
@@ -25,7 +51,6 @@ async function loadQuote(url) {
     console.error(error);
     return false;
   }
-  
   
   ///Hauptfunktion Fetch and Store APIs
 }
@@ -60,7 +85,23 @@ async function loadandStoreQuotes() {
 
 }
 
-//Hole aktuelles Datum aus Local Storage
+// Prüfen, ob Quotes für heute vorhanden
+if (!quotesAreValidForToday()) {
+  loadandStoreQuotes();
+} else {
+  // Quotes wurden heute gültig gespeichert = lade sie aus LocalStorage
+  const quote1 = localStorage.getItem("quote_GoT");
+  const quote2 = localStorage.getItem("quote_advice");
+  const quote3 = localStorage.getItem("quote_southpark");
+
+  console.log("Quote GoT:", quote1);
+  console.log("Quote Advice:", quote2);
+  console.log("Quote South Park:", quote3);
+}
+
+
+
+/*Hole aktuelles Datum aus Local Storage
 const savedDate = localStorage.getItem("quotes_saved_date");
 
 // Prüfen, ob Quotes schon für heute gespeichert wurden
@@ -75,7 +116,9 @@ if (savedDate !== formattedDate) {
   console.log("Quote GoT:", quote1);
   console.log("Quote Advice:", quote2);
   console.log("Quote South Park:", quote3);  
-}
+} */
+
+
 
 
 
