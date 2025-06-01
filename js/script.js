@@ -13,23 +13,23 @@ const today = new Date();
 const formattedDate = today.toLocaleDateString("de-DE"); // deutscher Stil
 console.log(formattedDate);
 
- // Speichere das Datum des letzten Speicherns im Local Storage
-localStorage.setItem("quotes_saved_date", formattedDate);
+ /* Speichere das Datum des letzten Speicherns im Local Storage -> früher nun in Array speichern
+localStorage.setItem("quotes_saved_date", formattedDate);*/
 
 
-//Überprüfung, ob an diesem entsprechenden Datum bereits Quotes abgespeichert
+//Überprüfung, ob am heutigen Datum bereits Quotes abgespeichert
 function quotesAreValidForToday() {
-  const savedDate = localStorage.getItem("quotes_saved_date");
-  if (savedDate !== formattedDate) return false;
-
+  const storedDates = JSON.parse(localStorage.getItem("quote_dates")) || [];
+  if (!storedDates.includes(formattedDate)) return false;
+  
   try {
-    const quote1 = JSON.parse(localStorage.getItem("quote_GoT"));
-    const quote2 = JSON.parse(localStorage.getItem("quote_advice"));
-    const quote3 = JSON.parse(localStorage.getItem("quote_southpark"));
+    const quote1 = JSON.parse(localStorage.getItem(`quote_GoT_${formattedDate}`));
+    const quote2 = JSON.parse(localStorage.getItem(`quote_advice_${formattedDate}`));
+    const quote3 = JSON.parse(localStorage.getItem(`quote_southpark_${formattedDate}`));
 
     if (!quote1 || !quote2 || !quote3) return false;
 
-    // einfache Gültigkeitschecks
+    // Gültigkeitschecks
     if (!quote1.sentence) return false;
     if (!quote2.slip?.advice) return false;
     if (!quote3.quote) return false;
@@ -39,7 +39,6 @@ function quotesAreValidForToday() {
     return false; // Parsing-Fehler => ungültig
   }
 }
-
 
 
 ///Hilfsfunktion
@@ -67,21 +66,28 @@ async function loadandStoreQuotes() {
   
   
   if (quote_1) {
-    localStorage.setItem("quote_GoT", JSON.stringify(quote_1));
+    localStorage.setItem(`quote_GoT_${formattedDate}`, JSON.stringify(quote_1));
     console.log("Game of Thrones gespeichert:", quote_1);
   }
 
   if (quote_2) {
-    localStorage.setItem("quote_advice", JSON.stringify(quote_2));
+    localStorage.setItem(`quote_advice_${formattedDate}`, JSON.stringify(quote_2));
     console.log("Advice gespeichert:", quote_2);
   }
 
   if (quote_3) {
     const quote_3 = quotes_3[0];
-    localStorage.setItem("quote_southpark", JSON.stringify(quote_3));
+    localStorage.setItem(`quote_southpark_${formattedDate}`, JSON.stringify(quote_3));
     console.log("South Park gespeichert:", quote_3);
   }
 
+  // Datum in Array speichern (wenn noch nicht vorhanden)
+    let storedDates = JSON.parse(localStorage.getItem("quote_dates")) || [];
+
+  if (!storedDates.includes(formattedDate)) {
+    storedDates.push(formattedDate);
+    localStorage.setItem("quote_dates", JSON.stringify(storedDates));
+  }
 
 }
 
@@ -90,9 +96,9 @@ if (!quotesAreValidForToday()) {
   loadandStoreQuotes();
 } else {
   // Quotes wurden heute gültig gespeichert = lade sie aus LocalStorage
-  const quote1 = localStorage.getItem("quote_GoT");
-  const quote2 = localStorage.getItem("quote_advice");
-  const quote3 = localStorage.getItem("quote_southpark");
+  const quote1 = localStorage.getItem(`quote_GoT_${formattedDate}`);
+  const quote2 = localStorage.getItem(`quote_advice_${formattedDate}`);
+  const quote3 = localStorage.getItem(`quote_southpark_${formattedDate}`);
 
   console.log("Quote GoT:", quote1);
   console.log("Quote Advice:", quote2);
@@ -200,13 +206,13 @@ document.addEventListener("DOMContentLoaded", () => {
       // Schritt 1: Hole das zugehörige Quote aus dem LocalStorage
             let quoteText = "";
       if (id === "leftcookie") {
-        const quote = JSON.parse(localStorage.getItem("quote_GoT"));
+        const quote = JSON.parse(localStorage.getItem(`quote_GoT_${formattedDate}`));
         quoteText = quote?.sentence || quote?.character?.name || "Zitat fehlt.";
       } else if (id === "middlecookie") {
-        const quote = JSON.parse(localStorage.getItem("quote_advice"));
+        const quote = JSON.parse(localStorage.getItem(`quote_advice_${formattedDate}`));
         quoteText = quote?.slip?.advice || "Zitat fehlt.";
       } else if (id === "rightcookie") {
-        const quote = JSON.parse(localStorage.getItem("quote_southpark"));
+        const quote = JSON.parse(localStorage.getItem(`quote_southpark_${formattedDate}`));
         quoteText = quote?.quote || "Zitat fehlt.";
       }
 
