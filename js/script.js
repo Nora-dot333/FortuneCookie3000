@@ -265,7 +265,6 @@ document.addEventListener("DOMContentLoaded", () => {
         quoteText = quote?.quote || "Zitat fehlt.";
       }
 
-
       // Schritt 2: Erstelle den Zettel (fortune-paper)
       const paper = document.createElement("div");
       paper.className = "fortune-paper";
@@ -324,3 +323,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+

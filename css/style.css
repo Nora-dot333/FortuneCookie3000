@@ -297,6 +297,7 @@ footer {
   right: 50%;
 } */
 
+
 /* Animation für linke Hälfte */
 .cookie-half.animate-left {
   animation: cookieSplitLeft 1.2s ease forwards;
