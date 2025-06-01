@@ -2,38 +2,6 @@ console.log("hoi script.js");
 
 ///////////////////////////////// Löschung alter Quotes bei Monatswechsel /////////////////////////////////////////
 
-function cleanUpOldQuotesIfNeeded() {
-  const today = new Date();
-  const currentMonth = today.getMonth() + 1;
-  const currentYear = today.getFullYear();
-  const monthKey = `${String(currentMonth).padStart(2, "0")}.${currentYear}`;
-
-  const lastCleanup = localStorage.getItem("last_quote_cleanup");
-
-  if (lastCleanup === monthKey) return; // Schon bereinigt
-
-  Object.keys(localStorage).forEach((key) => {
-    const match = key.match(/^quote_.*_(\d{2})\.(\d{2})\.(\d{4})$/);
-    if (match) {
-      const [_, day, month, year] = match;
-      const isCurrentMonth = parseInt(month) === currentMonth && parseInt(year) === currentYear;
-      if (!isCurrentMonth) {
-        localStorage.removeItem(key);
-        console.log(`Entfernt: ${key}`);
-      }
-    }
-  });
-
-  let dates = JSON.parse(localStorage.getItem("quote_dates")) || [];
-  const filteredDates = dates.filter((dateStr) => {
-    const [day, month, year] = dateStr.split(".");
-    return parseInt(month) === currentMonth && parseInt(year) === currentYear;
-  });
-
-  localStorage.setItem("quote_dates", JSON.stringify(filteredDates));
-  localStorage.setItem("last_quote_cleanup", monthKey); // Cleanup merken
-  console.log("Alte Quotes und Datumswerte bereinigt.");
-}
 
 
 /////////////////////Animaton bzw. Event CTA-Buttons/////////////////////////
@@ -46,8 +14,59 @@ function cleanUpOldQuotesIfNeeded() {
 
 //Aktuelles Datum (Aktueller Tag)
 const today = new Date();
-const formattedDate = today.toLocaleDateString("de-DE"); // deutscher Stil
-console.log(formattedDate);
+const day = String(today.getDate()).padStart(2, '0');
+const month = String(today.getMonth() + 1).padStart(2, '0');
+const year = today.getFullYear();
+const formattedDate = `${day}.${month}.${year}`;
+const currentMonthYear = `${year}-${month}`;
+
+
+/* //Testdaten für Clean-Up)//
+localStorage.setItem("quote_GoT_12.05.2025", JSON.stringify({ sentence: "Winter is coming." }));
+localStorage.setItem("quote_advice_10.05.2025", JSON.stringify({ slip: { advice: "Be kind." } }));
+localStorage.setItem("quote_southpark_15.05.2025", JSON.stringify({ quote: "Respect my authoritah!" }));
+localStorage.setItem("quote_dates", JSON.stringify(["12.05.2025", "10.05.2025", "15.05.2025"]));
+localStorage.setItem("quote_last_cleared_month", "2025-05");*/
+
+
+
+// Letztes Löschdatum aus localStorage (Monat-Jahr)
+const lastClearedMonth = localStorage.getItem("quote_last_cleared_month");
+
+// Funktion: Lösche alle Quotes, die nicht zum aktuellen Monat gehören
+function deleteQuotesFromLastMonth() {
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key.startsWith("quote_")) {
+      const parts = key.split("_");
+      const datePart = parts[parts.length - 1]; // z.B. "01.05.2025"
+      const [d, m, y] = datePart.split(".");
+      if (!d || !m || !y) continue; // Falls kein richtiges Datum
+
+      const keyMonthYear = `${y}-${m}`;
+
+      if (keyMonthYear !== currentMonthYear) {
+        localStorage.removeItem(key);
+        i--; // Da localStorage kürzer wird
+      }
+    }
+  }
+
+  // gespeicherte Daten Array bereinigen
+  let storedDates = JSON.parse(localStorage.getItem("quote_dates")) || [];
+  storedDates = storedDates.filter(dateStr => {
+    const [d, m, y] = dateStr.split(".");
+    return `${y}-${m}` === currentMonthYear;
+  });
+  localStorage.setItem("quote_dates", JSON.stringify(storedDates));
+}
+
+// Prüfen, ob Löschung nötig ()
+if (lastClearedMonth !== currentMonthYear) {
+  deleteQuotesFromLastMonth();
+  localStorage.setItem("quote_last_cleared_month", currentMonthYear);
+}
+
 
 
 //Überprüfung, ob am heutigen Datum bereits Quotes abgespeichert
