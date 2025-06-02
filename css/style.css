@@ -150,11 +150,12 @@ nav ul {
   transform: scale(1.2);
 }
 
-/*
-
-  .Calender { }
-  
-  */
+.Calender {
+  text-align: center;
+  margin-top: 40vh;
+  height: 60%;
+  font-size: 4rem;
+}
 
 footer {
   border-top: 2px solid #000000;
@@ -296,7 +297,6 @@ footer {
   animation: cookieSplitRight 1.2s ease forwards;
   right: 50%;
 } */
-
 
 /* Animation für linke Hälfte */
 .cookie-half.animate-left {
