@@ -151,10 +151,11 @@ nav ul {
 }
 
 .Calender {
-  text-align: center;
   margin-top: 40vh;
   height: 60%;
   font-size: 4rem;
+  text-align: center;
+  font-size: 2rem;
 }
 
 footer {
