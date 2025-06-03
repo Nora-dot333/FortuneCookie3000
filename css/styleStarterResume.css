@@ -51,7 +51,7 @@ img {
 }
 
 .getlucky {
-  margin-top: -120px;
+  margin-top: 120px;
   width: 80%;
   height: 60%;
 }
@@ -59,7 +59,6 @@ img {
 .bodystarterpage {
   background-color: #fbcb77;
 }
-
 
 /* Textboxen Text Starter- & Resumepage*/
 .info-box {
