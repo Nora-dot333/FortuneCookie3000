@@ -60,50 +60,63 @@ img {
   background-color: #fbcb77;
 }
 
+.whole_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /*Zwei Spalten*/
+  grid-template-rows: 1fr 1fr 1fr;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
 /* Textboxen Text Starter- & Resumepage*/
 .info-box {
   background-color: white;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 100%;
   line-height: 1.5;
   font-size: 2rem;
-  display: flex;
+  height: fit-content;
 }
 
 .info-box.left {
-  grid-row: 1/3;
+  grid-column: 1;
+  grid-row: 1;
   justify-self: start;
-  width: 90%;
-  padding-bottom: 2rem;
-  margin-bottom: 15rem;
+  width: 150%;
+  margin-bottom: 10rem;
   margin-top: 10rem;
 }
 
 .info-box.leftend {
+  grid-column: 1;
   grid-row: 3;
   justify-self: start;
-  width: 90%;
-  margin-bottom: 15rem;
+  width: 150%;
+  margin-bottom: 12rem;
+  margin-top: 10rem;
   position: relative;
 }
 
 .info-box.right {
-  grid-column: 2 / 3;
+  grid-column: 2;
+  grid-row: 2;
   justify-self: end;
-  width: 90%;
-  margin-bottom: 15rem;
+  width: 150%;
+  margin-bottom: 10rem;
+  margin-top: 10rem;
 }
 /* Container für CTA-Buttons Starter- & Resumepage */
 .button-container {
   position: absolute;
-  right: -5.5rem;
-  left: 60rem;
-  top: 50%;
-  transform: translateY(20%);
+  right: 50vw;
+  left: 50vw;
+  top: 0vw;
+  transform: translateY(57%);
   margin-top: 0;
 }
+
 /* Styling Get Started-Button */
 .getstarted-button {
   margin-top: 1rem;
@@ -117,6 +130,7 @@ img {
   align-items: center;
   justify-content: center;
   text-align: center;
+  width: 22vw;
   transition: background-color 0.3s ease; /*Hover*/
 }
 .getstarted-button:hover {
@@ -140,4 +154,84 @@ img {
 }
 .resume-button:hover {
   background-color: #6f1524;
+}
+
+/* Media Queries */
+/*Mobile*/
+
+@media (max-width: 768px) {
+  .headerhomepage {
+    margin: 2rem;
+  }
+
+  .mainlogo,
+  .getlucky {
+    width: 100%;
+    padding: 1rem 0;
+  }
+
+  .whole_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /*Zwei Spalten*/
+    grid-template-rows: auto auto auto;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+
+  .info-box {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    line-height: 1.5;
+    font-size: 1.5rem;
+    height: fit-content;
+  }
+
+  .info-box.left {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    width: 150%;
+    margin-bottom: 5rem;
+  }
+
+  .info-box.right {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+    width: 150%;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+  }
+
+  .info-box.leftend {
+    grid-column: 1;
+    grid-row: 3;
+    justify-self: start;
+    width: 150%;
+    position: relative;
+    margin-top: 5rem;
+  }
+
+  .button-container {
+    position: absolute;
+    right: 90vw;
+    left: 47vw;
+    top: 0vw;
+    transform: translateY(80%);
+    margin-top: 0;
+  }
+
+  .getstarted-button,
+  .resume-button {
+    font-size: 1.7rem;
+    padding: 1.2rem 2rem;
+    width: 22vw;
+  }
+
+  button {
+    text-align: center;
+  }
 }
