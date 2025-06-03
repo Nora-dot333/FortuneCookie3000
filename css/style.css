@@ -351,6 +351,12 @@ footer {
 
     @media (max-width: 992px) {
   
+      .buttonnav a {
+        font-size: 1.5rem;
+      }
+
+
+
   }
 
 
