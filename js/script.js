@@ -1,6 +1,5 @@
 console.log("hoi script.js");
 
-
 /////////////////////Animaton bzw. Event CTA-Buttons/////////////////////////
 
 //////////////////Fetch and Store APIs und aktuelles Datum//////////////////
@@ -11,12 +10,11 @@ console.log("hoi script.js");
 
 //Aktuelles Datum (Aktueller Tag)
 const today = new Date();
-const day = String(today.getDate()).padStart(2, '0');
-const month = String(today.getMonth() + 1).padStart(2, '0');
+const day = String(today.getDate()).padStart(2, "0");
+const month = String(today.getMonth() + 1).padStart(2, "0");
 const year = today.getFullYear();
 const formattedDate = `${day}.${month}.${year}`;
 const currentMonthYear = `${year}-${month}`;
-
 
 /* //Testdaten für Clean-Up)//
 localStorage.setItem("quote_GoT_12.05.2025", JSON.stringify({ sentence: "Winter is coming." }));
@@ -24,8 +22,6 @@ localStorage.setItem("quote_advice_10.05.2025", JSON.stringify({ slip: { advice:
 localStorage.setItem("quote_southpark_15.05.2025", JSON.stringify({ quote: "Respect my authoritah!" }));
 localStorage.setItem("quote_dates", JSON.stringify(["12.05.2025", "10.05.2025", "15.05.2025"]));
 localStorage.setItem("quote_last_cleared_month", "2025-05");*/
-
-
 
 // Letztes Löschdatum aus localStorage (Monat-Jahr)
 const lastClearedMonth = localStorage.getItem("quote_last_cleared_month");
@@ -51,7 +47,7 @@ function deleteQuotesFromLastMonth() {
 
   // gespeicherte Daten Array bereinigen
   let storedDates = JSON.parse(localStorage.getItem("quote_dates")) || [];
-  storedDates = storedDates.filter(dateStr => {
+  storedDates = storedDates.filter((dateStr) => {
     const [d, m, y] = dateStr.split(".");
     return `${y}-${m}` === currentMonthYear;
   });
@@ -64,17 +60,21 @@ if (lastClearedMonth !== currentMonthYear) {
   localStorage.setItem("quote_last_cleared_month", currentMonthYear);
 }
 
-
-
 //Überprüfung, ob am heutigen Datum bereits Quotes abgespeichert
 function quotesAreValidForToday() {
   const storedDates = JSON.parse(localStorage.getItem("quote_dates")) || [];
   if (!storedDates.includes(formattedDate)) return false;
-  
+
   try {
-    const quote1 = JSON.parse(localStorage.getItem(`quote_GoT_${formattedDate}`));
-    const quote2 = JSON.parse(localStorage.getItem(`quote_advice_${formattedDate}`));
-    const quote3 = JSON.parse(localStorage.getItem(`quote_southpark_${formattedDate}`));
+    const quote1 = JSON.parse(
+      localStorage.getItem(`quote_GoT_${formattedDate}`)
+    );
+    const quote2 = JSON.parse(
+      localStorage.getItem(`quote_advice_${formattedDate}`)
+    );
+    const quote3 = JSON.parse(
+      localStorage.getItem(`quote_southpark_${formattedDate}`)
+    );
 
     if (!quote1 || !quote2 || !quote3) return false;
 
@@ -89,7 +89,6 @@ function quotesAreValidForToday() {
   }
 }
 
-
 ///Hilfsfunktion
 async function loadQuote(url) {
   try {
@@ -99,9 +98,8 @@ async function loadQuote(url) {
     console.error(error);
     return false;
   }
-  
-  ///Hauptfunktion Fetch and Store APIs
 }
+///Hauptfunktion Fetch and Store APIs
 
 async function loadandStoreQuotes() {
   const quote_1 = await loadQuote(
@@ -112,32 +110,36 @@ async function loadandStoreQuotes() {
     "https://southparkquotes.onrender.com/v1/quotes/3"
   ); //SouthPark
   const quote_3 = await quotes_3[0];
-  
-  
+
   if (quote_1) {
     localStorage.setItem(`quote_GoT_${formattedDate}`, JSON.stringify(quote_1));
     console.log("Game of Thrones gespeichert:", quote_1);
   }
 
   if (quote_2) {
-    localStorage.setItem(`quote_advice_${formattedDate}`, JSON.stringify(quote_2));
+    localStorage.setItem(
+      `quote_advice_${formattedDate}`,
+      JSON.stringify(quote_2)
+    );
     console.log("Advice gespeichert:", quote_2);
   }
 
   if (quote_3) {
     const quote_3 = quotes_3[0];
-    localStorage.setItem(`quote_southpark_${formattedDate}`, JSON.stringify(quote_3));
+    localStorage.setItem(
+      `quote_southpark_${formattedDate}`,
+      JSON.stringify(quote_3)
+    );
     console.log("South Park gespeichert:", quote_3);
   }
 
   // Datum in Array speichern (wenn noch nicht vorhanden)
-    let storedDates = JSON.parse(localStorage.getItem("quote_dates")) || [];
+  let storedDates = JSON.parse(localStorage.getItem("quote_dates")) || [];
 
   if (!storedDates.includes(formattedDate)) {
     storedDates.push(formattedDate);
     localStorage.setItem("quote_dates", JSON.stringify(storedDates));
   }
-
 }
 
 // Prüfen, ob Quotes für heute vorhanden
@@ -153,8 +155,6 @@ if (!quotesAreValidForToday()) {
   console.log("Quote Advice:", quote2);
   console.log("Quote South Park:", quote3);
 }
-
-
 
 /*Hole aktuelles Datum aus Local Storage
 const savedDate = localStorage.getItem("quotes_saved_date");
@@ -172,10 +172,6 @@ if (savedDate !== formattedDate) {
   console.log("Quote Advice:", quote2);
   console.log("Quote South Park:", quote3);  
 } */
-
-
-
-
 
 ///////////////////////////////Cookie Breaks ////////////////////////////////
 document.addEventListener("DOMContentLoaded", () => {
@@ -220,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Originale Cookies entfernen/verstecken
       cookie.style.visibility = "hidden";
 
-      // Warte auf Animationsende
+      //Warte auf Animationsende
       await new Promise((resolve) => setTimeout(resolve, 700));
 
       // Entferne das animierte Cookie-Bild
@@ -253,15 +249,21 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Cookie zerbrochen!");
 
       // Schritt 1: Hole das zugehörige Quote aus dem LocalStorage
-            let quoteText = "";
+      let quoteText = "";
       if (id === "leftcookie") {
-        const quote = JSON.parse(localStorage.getItem(`quote_GoT_${formattedDate}`));
+        const quote = JSON.parse(
+          localStorage.getItem(`quote_GoT_${formattedDate}`)
+        );
         quoteText = quote?.sentence || quote?.character?.name || "Zitat fehlt.";
       } else if (id === "middlecookie") {
-        const quote = JSON.parse(localStorage.getItem(`quote_advice_${formattedDate}`));
+        const quote = JSON.parse(
+          localStorage.getItem(`quote_advice_${formattedDate}`)
+        );
         quoteText = quote?.slip?.advice || "Zitat fehlt.";
       } else if (id === "rightcookie") {
-        const quote = JSON.parse(localStorage.getItem(`quote_southpark_${formattedDate}`));
+        const quote = JSON.parse(
+          localStorage.getItem(`quote_southpark_${formattedDate}`)
+        );
         quoteText = quote?.quote || "Zitat fehlt.";
       }
 
@@ -323,4 +325,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
