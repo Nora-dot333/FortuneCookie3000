@@ -116,12 +116,14 @@ nav ul {
 
 .FortuneCookies {
   background-color: #9f1c2e;
+  padding-top: 0.5rem;
   border-top: 2px solid #f8f0eb;
   border-bottom: 2px solid #f8f0eb;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  height: 100vh;
 }
 
 .imgcookies {
@@ -130,7 +132,6 @@ nav ul {
   justify-content: center;
   gap: 2rem;
   position: relative;
-  height: 100vh;
 }
 
 .imgcookies img {

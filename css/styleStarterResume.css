@@ -17,7 +17,8 @@ html {
 
 h1,
 h2,
-h3 {
+h3,
+button {
   font-family: "Modak", system-ui;
   font-weight: 400;
   font-style: normal;
@@ -27,71 +28,15 @@ h3 {
     -1px 0px 0 black;
 }
 
+button {
+  font-size: 2.6rem;
+}
+
 img {
   max-width: 100%;
   display: inline-block;
   height: auto;
   background-color: transparent !important;
-}
-
-body {
-  background: #f99d90;
-  font-size: 1.7rem;
-}
-
-.whole_grid {
-  display: grid;
-  grid-template-rows: auto auto 1fr auto;
-  grid-template-areas:
-    "nav"
-    "header"
-    "main"
-    "footer";
-  min-height: 100vh; /* damit die Seite die volle Höhe hat */
-  max-width: 100%;
-}
-
-nav {
-  grid-area: nav;
-}
-header {
-  grid-area: header;
-}
-main {
-  grid-area: main;
-}
-footer {
-  grid-area: footer;
-}
-
-nav {
-  border-bottom: 2px solid #000000;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 6rem;
-  margin: 0;
-  max-width: 100%;
-}
-
-.buttonnav {
-  background-color: #f8f0eb;
-  border: 2px solid #9f1c2e;
-  border-radius: 30px; /* Runde Ecken */
-  width: 17vw;
-  max-width: 500px;
-  height: 5vh;
-  max-height: 300px;
-  font-weight: bold;
-  cursor: pointer;
-  user-select: none; /* Verhindert Markieren/Kopieren */
-  transition: background-color 0.3s ease; /*Hover*/
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .headerhomepage {
@@ -115,21 +60,6 @@ nav ul {
   background-color: #fbcb77;
 }
 
-/*
-
-  .Calender { }
-  .FortuneCookies { }
-  */
-
-footer {
-  border-top: 2px solid #000000;
-}
-
-nav,
-footer {
-  background-color: #eb7a6a;
-  padding: 3rem 0;
-}
 
 /* Textboxen Text Starter- & Resumepage*/
 .info-box {
@@ -184,7 +114,6 @@ footer {
   border: none;
   border-radius: 999px;
   cursor: pointer;
-  font-size: 1.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -195,10 +124,6 @@ footer {
   background-color: #b15236;
 }
 
-.getstarted-button h1 {
-  color: white;
-  font-size: 2.6rem;
-}
 /* Styling Resume-Button */
 .resume-button {
   margin-top: 1rem;
@@ -208,7 +133,6 @@ footer {
   border: none;
   border-radius: 999px;
   cursor: pointer;
-  font-size: 1.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -217,9 +141,4 @@ footer {
 }
 .resume-button:hover {
   background-color: #6f1524;
-}
-
-.resume-button h1 {
-  color: white;
-  font-size: 2.6rem;
 }
