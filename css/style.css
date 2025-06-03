@@ -100,14 +100,13 @@ nav ul {
 }
 
 .mainlogo {
-  margin-bottom: -100px;
+  padding-top: 3rem;
   width: 80vw;
 }
 
 .getlucky {
-  margin-top: -100px;
-  width: 80%;
-  height: 60%;
+  width: 80vw;
+  padding-bottom: 3rem;
 }
 
 .bodystarterpage {

@@ -47,13 +47,13 @@ img {
 }
 
 .mainlogo {
-  margin-bottom: -120px;
+  padding-top: 3rem;
+  width: 80vw;
 }
 
 .getlucky {
-  margin-top: 120px;
-  width: 80%;
-  height: 60%;
+  width: 80vw;
+  padding-bottom: 3rem;
 }
 
 .bodystarterpage {
