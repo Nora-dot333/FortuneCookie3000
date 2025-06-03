@@ -16,6 +16,12 @@ const year = today.getFullYear();
 const formattedDate = `${day}.${month}.${year}`;
 const currentMonthYear = `${year}-${month}`;
 
+//Datum soll in HTML angezeigt werden können
+const dateElement = document.getElementById("current-date");
+if (dateElement) {
+  dateElement.textContent = formattedDate;
+}
+
 /* //Testdaten für Clean-Up)//
 localStorage.setItem("quote_GoT_12.05.2025", JSON.stringify({ sentence: "Winter is coming." }));
 localStorage.setItem("quote_advice_10.05.2025", JSON.stringify({ slip: { advice: "Be kind." } }));
