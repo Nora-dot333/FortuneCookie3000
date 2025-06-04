@@ -359,17 +359,20 @@ html, body {
         cursor: pointer;
         position: absolute;
         right: 4rem;
+        width: 30px;
+        height: 22px;
         z-index: 1100;
     }
 
     .line {
-        width: 2rem;
-        height: 3px;
+        width: 3rem;
+        height: 5px;
         background-color: black;
+        transition: all 0.4s ease;
+        transform-origin: center;
     }
 
-    /* Verstecke normale Navigation */
-    .nav-links {
+  .nav-links {
         display: none;
         position: fixed;
         top: 0;
@@ -384,11 +387,26 @@ html, body {
         z-index: 1099;
     }
 
-    .nav-links.show {
+  .nav-links.show {
         display: flex;
     }
 
-    .buttonnav {
+  .burger.active .line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .burger.active .line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .burger.active .line:nth-child(3) {
+    transform: rotate(-45deg) translate(8.5px, -8.5px);
+  }
+  
+}
+
+    
+  .buttonnav {
       width: 200px;
     }
    
@@ -398,7 +416,7 @@ html, body {
 
 
 
-  }
+
 
 
 	@media (max-width: 768px) {
