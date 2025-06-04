@@ -376,11 +376,12 @@ html, body {
         left: 0;
         width: 100vw;
         height: 100vh;
-        background-color: rgba(0, 0, 0, 0.8);
+        background-color: #EB7A6A;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 20px;
+        gap: 2rem;
+        z-index: 1099;
     }
 
     .nav-links.show {
