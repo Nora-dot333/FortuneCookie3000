@@ -327,7 +327,21 @@ document.addEventListener("DOMContentLoaded", () => {
           quoteTextElem.textContent = quoteText;
           paper.appendChild(quoteTextElem);
         }, 50);
-      });
+      });  
     });
   });
+
+ //////////////////////Burgermenu///////////////////////////////////////////
+
+  const burger = document.getElementById("burger");
+  const navLinks = document.getElementById("nav-links");
+
+  if (burger && navLinks) {
+    burger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+  }
+
+
+
 });

@@ -67,7 +67,6 @@ nav ul {
   display: flex;
   justify-content: center;
   gap: 6rem;
-  margin: 0;
   max-width: 100%;
 }
 
@@ -107,10 +106,6 @@ nav ul {
 .getlucky {
   width: 80vw;
   padding-bottom: 3rem;
-}
-
-.bodystarterpage {
-  background-color: #fbcb77;
 }
 
 .FortuneCookies {
@@ -348,16 +343,67 @@ footer {
   text-align: center;
 }
 
-
-    @media (max-width: 992px) {
   
-      .buttonnav a {
-        font-size: 1.5rem;
-      }
+@media (max-width: 992px) {
+    
+html, body {
+
+  margin: 0;
+  padding: 0;
+  }
+
+    .burger {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        cursor: pointer;
+        position: absolute;
+        right: 4rem;
+        z-index: 1100;
+    }
+
+    .line {
+        width: 2rem;
+        height: 3px;
+        background-color: black;
+    }
+
+    /* Verstecke normale Navigation */
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.8);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .buttonnav {
+      width: 200px;
+    }
+   
+  .buttonnav a {
+     font-size: 1 em;
+           }
 
 
 
   }
 
 
-	@media (max-width: 600px) {}
+	@media (max-width: 768px) {
+
+  .buttonnav {
+    width: 170px;
+  }
+
+  }
