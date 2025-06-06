@@ -1,13 +1,12 @@
 console.log("hoi script.js");
 
-//////////////////Fetch and Store APIs und aktuelles Datum//////////////////
+//////////////////Aktuelles Datum & Fetch and Store APIs //////////////////
 
 //Aktuelles Datum
 const today = new Date();
 const formattedDate = `${String(today.getDate()).padStart(2, "0")}.${String(today.getMonth() + 1).padStart(2, "0")}.${today.getFullYear()}`;
 const currentMonthYear = today.toISOString().slice(0, 7);
 
-// Datum für HTML 
 const dateElement = document.getElementById("current-date");
 if (dateElement) {
   dateElement.textContent = today.toLocaleDateString("de-DE", {
@@ -17,6 +16,9 @@ if (dateElement) {
   });
 }
 
+
+// Funktion: Lösche alle Quotes bei Monatswechsel -> bei jedem Aufruf wird überprüft, neuer Monat & Quotes gelösch oder nicht
+
 /* //Testdaten für Clean-Up -> wenn aktiv kann kurz austesten, ob Funktion funktioniert//
 localStorage.setItem("quote_GoT_12.05.2025", JSON.stringify({ sentence: "Winter is coming." }));
 localStorage.setItem("quote_advice_10.05.2025", JSON.stringify({ slip: { advice: "Be kind." } }));
@@ -24,43 +26,36 @@ localStorage.setItem("quote_southpark_15.05.2025", JSON.stringify({ quote: "Resp
 localStorage.setItem("quote_dates", JSON.stringify(["12.05.2025", "10.05.2025", "15.05.2025"]));
 localStorage.setItem("quote_last_cleared_month", "2025-05");*/
 
-
-// Lösche alle Quotes bei Monatswechsel -> bei jedem Aufruf wird überprüft, neuer Monat & Quotes gelösch oder nicht
-
 const lastClearedMonth = localStorage.getItem("quote_last_cleared_month");
 
-function deleteQuotesFromLastMonth() {
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (key.startsWith("quote_")) {
-      const parts = key.split("_");
-      const datePart = parts[parts.length - 1]; 
-      const [d, m, y] = datePart.split(".");
-      if (!d || !m || !y) continue; 
+function deleteOldQuotes() {
+  const validPrefix = "quote_";
+  const validDates = [];
 
-      const keyMonthYear = `${y}-${m}`;
+  Object.keys(localStorage).forEach((key) => {
+    if (!key.startsWith(validPrefix) || key === "quote_last_cleared_month" || key === "quote_dates") return;
 
-      if (keyMonthYear !== currentMonthYear) {
-        localStorage.removeItem(key);
-        i--;
-      }
+    const datePart = key.split("_").pop(); 
+    const [d, m, y] = datePart.split(".");
+    if (!d || !m || !y) return;
+
+    const itemMonthYear = `${y}-${m}`;
+    if (itemMonthYear === currentMonthYear) {
+      validDates.push(datePart); 
+    } else {
+      localStorage.removeItem(key); 
     }
-  }
-
-  // gespeicherte Daten Array bereinigen
-  let storedDates = JSON.parse(localStorage.getItem("quote_dates")) || [];
-  storedDates = storedDates.filter((dateStr) => {
-    const [d, m, y] = dateStr.split(".");
-    return `${y}-${m}` === currentMonthYear;
   });
-  localStorage.setItem("quote_dates", JSON.stringify(storedDates));
-}
 
-// Prüfen, ob Löschung nötig ()
-if (lastClearedMonth !== currentMonthYear) {
-  deleteQuotesFromLastMonth();
+  localStorage.setItem("quote_dates", JSON.stringify(validDates));
   localStorage.setItem("quote_last_cleared_month", currentMonthYear);
 }
+
+if (lastClearedMonth !== currentMonthYear) {
+  deleteOldQuotes();
+}
+
+
 
 //Überprüfung, ob am heutigen Datum bereits Quotes abgespeichert
 function quotesAreValidForToday() {
@@ -80,7 +75,6 @@ function quotesAreValidForToday() {
 
     if (!quote1 || !quote2 || !quote3) return false;
 
-    // Gültigkeitschecks
     if (!quote1.sentence) return false;
     if (!quote2.slip?.advice) return false;
     if (!quote3.quote) return false;
@@ -101,6 +95,8 @@ async function loadQuote(url) {
     return false;
   }
 }
+
+
 ///Hauptfunktion Fetch and Store APIs
 
 async function loadandStoreQuotes() {
