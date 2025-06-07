@@ -506,6 +506,10 @@ footer {
     top: 50%;
   }
 
+
+
+
+
   /* transform-origin: center center;*/
 
   @keyframes popAtPlace {
@@ -551,4 +555,4 @@ footer {
       transform: scale(1.3);
     }
   }
-}
+  }
