@@ -485,4 +485,70 @@ footer {
   .cookie-slider-wrapper::-webkit-scrollbar {
     display: none;
   }
+
+  /* Schritt 6 Cookie Break Mobil */
+  .mobile-scale {
+    transform: scale(0.8);
+    /* ggf. noch Positionierung anpassen */
+  }
+
+  .fortune-paper.mobile-scale {
+    width: 80vw !important; /* Papier größer in Relation zum Screen */
+    font-size: 1rem; /* ggf. kleinere Schrift */
+    /* zentrieren falls nötig */
+    left: 50% !important;
+    transform: scale(0.8) !important;
+  }
+
+  .cookie-half.mobile-scale {
+    width: 30vw; /* oder feste Größe passend zur mobilen Ansicht */
+    position: absolute;
+    top: 50%;
+  }
+
+  /* transform-origin: center center;*/
+
+  @keyframes popAtPlace {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  /*Mittelposition weg mobile*/
+  @keyframes leftToCenter {
+    0% {
+      transform: rotate(-15deg);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+  }
+
+  @keyframes rightToCenter {
+    0% {
+      transform: rotate(15deg);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+  }
+
+  @keyframes middlePop {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.3);
+    }
+  }
 }

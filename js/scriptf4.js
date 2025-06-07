@@ -271,6 +271,39 @@ async function breakCookie(id) {
       paper.appendChild(quoteTextElem);
     }, 50);
   });
+
+  // Schritt 6: Mobile Ansicht Cookie Break
+
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  if (isMobile) {
+    // Füge hier die mobile-spezifischen Styles hinzu, z.B. Klassen
+    leftHalf.classList.add("mobile-scale");
+    rightHalf.classList.add("mobile-scale");
+    paper.classList.add("mobile-scale");
+
+    // Außerdem Swipe deaktivieren (overflow-x verstecken)
+    const slider = document.querySelector(".cookie-slider-wrapper");
+    if (slider) {
+      slider.style.overflowX = "hidden";
+      slider.style.pointerEvents = "none";
+    }
+  }
+  /*Mittel Position nur bei Desktop
+  if (isMobile) {
+    animatedCookie.style.position = "relative"; // oder "static"
+    animatedCookie.style.top = "";
+    animatedCookie.style.left = "";
+    animatedCookie.style.transform = "";
+  }*/
+
+  if (isMobile) {
+    // Mobile: Cookie soll an Ort und Stelle bleiben
+    animatedCookie.style.position = "absolute";
+    animatedCookie.style.top = "initial";
+    animatedCookie.style.left = "initial";
+    animatedCookie.style.transform = "none";
+    animatedCookie.style.animation = "popAtPlace 0.5s ease forwards";
+  }
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
