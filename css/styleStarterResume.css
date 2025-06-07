@@ -96,7 +96,6 @@ img {
   width: 150%;
   margin-bottom: 12rem;
   margin-top: 10rem;
-  position: relative;
 }
 
 .info-box.right {
@@ -107,14 +106,17 @@ img {
   margin-bottom: 10rem;
   margin-top: 10rem;
 }
-/* Container für CTA-Buttons Starter- & Resumepage */
+
 .button-container {
-  position: absolute;
-  right: 50vw;
-  left: 50vw;
-  top: 0vw;
-  transform: translateY(57%);
-  margin-top: 0;
+  justify-self: end;
+}
+
+/*Grid Button*/
+.button-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 5rem;
 }
 
 /* Styling Get Started-Button */
@@ -130,7 +132,7 @@ img {
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 22vw;
+  width: auto;
   transition: background-color 0.3s ease; /*Hover*/
 }
 .getstarted-button:hover {
@@ -211,24 +213,23 @@ img {
     grid-row: 3;
     justify-self: start;
     width: 150%;
-    position: relative;
     margin-top: 5rem;
   }
 
+  .button-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
   .button-container {
-    position: absolute;
-    right: 90vw;
-    left: 47vw;
-    top: 0vw;
-    transform: translateY(80%);
-    margin-top: 0;
+    justify-self: end;
   }
 
   .getstarted-button,
   .resume-button {
     font-size: 1.7rem;
     padding: 1.2rem 2rem;
-    width: 22vw;
+    width: auto;
   }
 
   button {
