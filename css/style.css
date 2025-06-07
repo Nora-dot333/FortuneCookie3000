@@ -343,53 +343,51 @@ footer {
   text-align: center;
 }
 
-  
 @media (max-width: 992px) {
-    
-html, body {
-
-  margin: 0;
-  padding: 0;
+  html,
+  body {
+    margin: 0;
+    padding: 0;
   }
 
-    .burger {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        cursor: pointer;
-        position: absolute;
-        right: 4rem;
-        width: 30px;
-        height: 22px;
-        z-index: 1100;
-    }
+  .burger {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    cursor: pointer;
+    position: absolute;
+    right: 4rem;
+    width: 30px;
+    height: 22px;
+    z-index: 1100;
+  }
 
-    .line {
-        width: 3rem;
-        height: 5px;
-        background-color: black;
-        transition: all 0.4s ease;
-        transform-origin: center;
-    }
+  .line {
+    width: 3rem;
+    height: 5px;
+    background-color: black;
+    transition: all 0.4s ease;
+    transform-origin: center;
+  }
 
   .nav-links {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: #EB7A6A;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 2rem;
-        z-index: 1099;
-    }
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #eb7a6a;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    z-index: 1099;
+  }
 
   .nav-links.show {
-        display: flex;
-    }
+    display: flex;
+  }
 
   .burger.active .line:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
@@ -402,27 +400,89 @@ html, body {
   .burger.active .line:nth-child(3) {
     transform: rotate(-45deg) translate(8.5px, -8.5px);
   }
-  
 }
 
-    
-  .buttonnav {
-      width: 200px;
-    }
-   
-  .buttonnav a {
-     font-size: 1 em;
-           }
+.buttonnav {
+  width: 200px;
+}
 
+.buttonnav a {
+  font-size: 1 em;
+}
 
-
-
-
-
-	@media (max-width: 768px) {
-
-  .buttonnav {
-    width: 170px;
+@media (max-width: 768px) {
+  /* Anpassungen für Grid in kleiner Ansicht */
+  .whole_grid {
+    display: grid;
+    grid-template-rows: 130px 60vh 100vh 100vh 130px; /* 5 Reihen */
+    grid-template-areas:
+      "nav"
+      "header"
+      "fortunecookies"
+      "Calender"
+      "footer";
+    min-height: 100vh;
+    max-width: 100%;
   }
 
+  html,
+  body {
+    margin: 0;
+    padding: 0;
   }
+
+  /* Schriftgrößen kleiner machen */
+  h1 {
+    font-size: 2.8rem;
+  }
+
+  body {
+    font-size: 1.1rem;
+  }
+
+  nav {
+    padding: 4rem;
+  }
+
+  .headerhomepage img {
+    width: 90vw;
+    height: auto;
+  }
+
+  .Calender {
+    padding: 1rem;
+  }
+
+  footer img {
+    height: 7rem;
+    width: 6rem;
+  }
+
+  /* Mobile Ansicht Swipe */
+  /* Cookie Wrapper damit nur ein Cookie sichtbar bei Swipe */
+  .cookie-slider-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  /* Horizontale Scroll-Fläche */
+  .imgcookies {
+    width: 300%;
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+  }
+
+  /* Breite einzelner Cookies */
+  .imgcookies img {
+    width: auto;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+  }
+
+  /* Scrollbar verstecken */
+  .cookie-slider-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+}

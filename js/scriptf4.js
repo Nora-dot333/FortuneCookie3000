@@ -4,7 +4,9 @@ console.log("hoi script.js");
 
 //Aktuelles Datum
 const today = new Date();
-const formattedDate = `${String(today.getDate()).padStart(2, "0")}.${String(today.getMonth() + 1).padStart(2, "0")}.${today.getFullYear()}`;
+const formattedDate = `${String(today.getDate()).padStart(2, "0")}.${String(
+  today.getMonth() + 1
+).padStart(2, "0")}.${today.getFullYear()}`;
 const currentMonthYear = today.toISOString().slice(0, 7);
 
 const dateElement = document.getElementById("current-date");
@@ -15,7 +17,6 @@ if (dateElement) {
     year: "numeric",
   });
 }
-
 
 // Funktion: Lösche alle Quotes bei Monatswechsel -> bei jedem Aufruf wird überprüft, neuer Monat & Quotes gelösch oder nicht
 
@@ -33,17 +34,22 @@ function deleteOldQuotes() {
   const validDates = [];
 
   Object.keys(localStorage).forEach((key) => {
-    if (!key.startsWith(validPrefix) || key === "quote_last_cleared_month" || key === "quote_dates") return;
+    if (
+      !key.startsWith(validPrefix) ||
+      key === "quote_last_cleared_month" ||
+      key === "quote_dates"
+    )
+      return;
 
-    const datePart = key.split("_").pop(); 
+    const datePart = key.split("_").pop();
     const [d, m, y] = datePart.split(".");
     if (!d || !m || !y) return;
 
     const itemMonthYear = `${y}-${m}`;
     if (itemMonthYear === currentMonthYear) {
-      validDates.push(datePart); 
+      validDates.push(datePart);
     } else {
-      localStorage.removeItem(key); 
+      localStorage.removeItem(key);
     }
   });
 
@@ -54,8 +60,6 @@ function deleteOldQuotes() {
 if (lastClearedMonth !== currentMonthYear) {
   deleteOldQuotes();
 }
-
-
 
 //Überprüfung, ob am heutigen Datum bereits Quotes abgespeichert
 function quotesAreValidForToday() {
@@ -95,7 +99,6 @@ async function loadQuote(url) {
     return false;
   }
 }
-
 
 ///Hauptfunktion Fetch and Store APIs
 
@@ -154,10 +157,9 @@ if (!quotesAreValidForToday()) {
   console.log("Quote South Park:", quote3);
 }
 
-
 //////////////////Break the Cookie////////////////////////////
 
- async function breakCookie(id) {
+async function breakCookie(id) {
   const cookieIds = ["leftcookie", "middlecookie", "rightcookie"];
   const container = document.getElementById("cookie-container");
   const cookie = document.getElementById(id);
@@ -298,59 +300,102 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
-    
+  ////Swipe Animation Mobile ///////
 
- //////////////////////Burgermenu///////////////////////////////////////////
-function smoothScroll(target) {
-  const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
-  const startPosition = window.pageYOffset;
-  const distance = targetPosition - startPosition;
-  const duration = 600;
-  let start = null;
+  const slider = document.querySelector(".cookie-slider-wrapper");
+  if (slider) {
+    let startX = 0;
+    let currentScroll = 0;
+    let isDragging = false;
 
-  function step(timestamp) {
-    if (!start) start = timestamp;
-    const progress = timestamp - start;
-    const ease = (t) => t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; // easeInOutQuad
-    const timeFraction = Math.min(progress / duration, 1);
-    const easedProgress = ease(timeFraction);
-    window.scrollTo(0, startPosition + distance * easedProgress);
-    if (progress < duration) {
-      requestAnimationFrame(step);
+    slider.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].pageX;
+      currentScroll = slider.scrollLeft;
+      isDragging = true;
+    });
+
+    slider.addEventListener("touchmove", (e) => {
+      if (!isDragging) return;
+      const x = e.touches[0].pageX;
+      const walk = startX - x; // Swipe Distanz
+      slider.scrollLeft = currentScroll + walk;
+    });
+
+    slider.addEventListener("touchend", (e) => {
+      isDragging = false;
+      snapToNearest();
+    });
+
+    function snapToNearest() {
+      const cookie = slider.querySelector("img");
+      if (!cookie) return;
+      const gap = 48;
+      const cookieWidth = cookie.offsetWidth + gap;
+
+      const scrollLeft = slider.scrollLeft;
+      const index = Math.round(scrollLeft / cookieWidth);
+
+      slider.scrollTo({
+        left: index * cookieWidth,
+        behavior: "smooth",
+      });
     }
   }
 
-  requestAnimationFrame(step);
-}
+  //////////////////////Burgermenu///////////////////////////////////////////
+  function smoothScroll(target) {
+    const targetPosition =
+      target.getBoundingClientRect().top + window.pageYOffset;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    const duration = 600;
+    let start = null;
 
-const burger = document.getElementById("burger");
-const navLinks = document.getElementById("nav-links");
-
-if (burger && navLinks) {
-  // Burger Menü toggeln
-  burger.addEventListener("click", () => {
-    burger.classList.toggle("active");  // Icon zum X
-    navLinks.classList.toggle("show");  // Menü öffnen/schließen
-  });
-
-  // Nur die zwei Links "Calender" und "Cookie Time" abgreifen
-  const specialLinks = navLinks.querySelectorAll('a[href="#Calender"], a[href="#fortunecookies"]');
-
-  specialLinks.forEach(link => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();  // Standard-Sprung verhindern
-
-      // Menü schließen
-      burger.classList.remove("active");
-      navLinks.classList.remove("show");
-
-      // Sanft scrollen zur Sektion mit eigener Animation
-      const targetId = link.getAttribute("href");
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        smoothScroll(targetElement);
+    function step(timestamp) {
+      if (!start) start = timestamp;
+      const progress = timestamp - start;
+      const ease = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t); // easeInOutQuad
+      const timeFraction = Math.min(progress / duration, 1);
+      const easedProgress = ease(timeFraction);
+      window.scrollTo(0, startPosition + distance * easedProgress);
+      if (progress < duration) {
+        requestAnimationFrame(step);
       }
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  const burger = document.getElementById("burger");
+  const navLinks = document.getElementById("nav-links");
+
+  if (burger && navLinks) {
+    // Burger Menü toggeln
+    burger.addEventListener("click", () => {
+      burger.classList.toggle("active"); // Icon zum X
+      navLinks.classList.toggle("show"); // Menü öffnen/schließen
     });
-  });
-}
+
+    // Nur die zwei Links "Calender" und "Cookie Time" abgreifen
+    const specialLinks = navLinks.querySelectorAll(
+      'a[href="#Calender"], a[href="#fortunecookies"]'
+    );
+
+    specialLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault(); // Standard-Sprung verhindern
+
+        // Menü schließen
+        burger.classList.remove("active");
+        navLinks.classList.remove("show");
+
+        // Sanft scrollen zur Sektion mit eigener Animation
+        const targetId = link.getAttribute("href");
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          smoothScroll(targetElement);
+        }
+      });
+    });
+  }
 });
