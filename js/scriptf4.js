@@ -2,7 +2,6 @@ console.log("hoi script.js");
 
 //////////////////Aktuelles Datum & Fetch and Store APIs //////////////////
 
-//Aktuelles Datum
 const today = new Date();
 const formattedDate = `${String(today.getDate()).padStart(2, "0")}.${String(
   today.getMonth() + 1
@@ -61,6 +60,7 @@ if (lastClearedMonth !== currentMonthYear) {
   deleteOldQuotes();
 }
 
+
 //Überprüfung, ob am heutigen Datum bereits Quotes abgespeichert
 function quotesAreValidForToday() {
   const storedDates = JSON.parse(localStorage.getItem("quote_dates")) || [];
@@ -83,13 +83,15 @@ function quotesAreValidForToday() {
     if (!quote2.slip?.advice) return false;
     if (!quote3.quote) return false;
 
-    return true; // alle vorhanden & valide
+    return true; 
   } catch (e) {
-    return false; // Parsing-Fehler => ungültig
+    return false; 
   }
 }
 
-///Hilfsfunktion
+
+//Laden und Speichern API's
+
 async function loadQuote(url) {
   try {
     const response = await fetch(url);
@@ -100,16 +102,14 @@ async function loadQuote(url) {
   }
 }
 
-///Hauptfunktion Fetch and Store APIs
-
 async function loadandStoreQuotes() {
   const quote_1 = await loadQuote(
     "https://api.gameofthronesquotes.xyz/v1/random"
-  ); //GameofThrones
-  const quote_2 = await loadQuote("https://api.adviceslip.com/advice"); //AdviceSlip
+  ); 
+  const quote_2 = await loadQuote("https://api.adviceslip.com/advice"); 
   const quotes_3 = await loadQuote(
     "https://southparkquotes.onrender.com/v1/quotes/3"
-  ); //SouthPark
+  );
   const quote_3 = quotes_3[0];
 
   if (quote_1) {
@@ -134,7 +134,7 @@ async function loadandStoreQuotes() {
     console.log("South Park gespeichert:", quote_3);
   }
 
-  // Datum in Array speichern (wenn noch nicht vorhanden)
+  
   let storedDates = JSON.parse(localStorage.getItem("quote_dates")) || [];
 
   if (!storedDates.includes(formattedDate)) {
@@ -149,7 +149,7 @@ if (!quotesAreValidForToday()) {
   localStorage.setItem("openedCookie", "");
   loadandStoreQuotes();
 } else {
-  // Quotes wurden heute gültig gespeichert = lade sie aus LocalStorage
+  
   const quote1 = localStorage.getItem(`quote_GoT_${formattedDate}`);
   const quote2 = localStorage.getItem(`quote_advice_${formattedDate}`);
   const quote3 = localStorage.getItem(`quote_southpark_${formattedDate}`);
