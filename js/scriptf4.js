@@ -239,7 +239,7 @@ async function breakCookie(id) {
   // Schritt 2: Erstelle den Zettel (fortune-paper)
   const paper = document.createElement("div");
   paper.className = "fortune-paper";
-  paper.textContent = ""; // zuerst leer
+  paper.textContent = "";
   container.appendChild(paper);
 
   // Schritt 3: Setze Breite dynamisch basierend auf Textlänge
