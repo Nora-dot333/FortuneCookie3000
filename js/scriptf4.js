@@ -145,6 +145,8 @@ async function loadandStoreQuotes() {
 
 // Prüfen, ob Quotes für heute vorhanden
 if (!quotesAreValidForToday()) {
+  localStorage.removeItem("openedCookie");
+  localStorage.setItem("openedCookie", "");
   loadandStoreQuotes();
 } else {
   // Quotes wurden heute gültig gespeichert = lade sie aus LocalStorage
