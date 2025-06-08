@@ -88,7 +88,7 @@ function quotesAreValidForToday() {
   }
 }
 
-let quotesLoaded = false;
+
 
 //Laden und Speichern API's
 
@@ -145,9 +145,6 @@ async function loadAndStoreQuotes() {
 if (!quotesAreValidForToday()) {
   localStorage.setItem("openedCookie", "");
   await loadAndStoreQuotes();
-} else {
-
-    quotesLoaded = true;
 
   const quote1 = localStorage.getItem(`quote_GoT_${formattedDate}`);
   const quote2 = localStorage.getItem(`quote_advice_${formattedDate}`);
@@ -306,7 +303,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const cookie = document.getElementById(id);
     if (!cookie) return;
     cookie.addEventListener("click", async () => {
-        if(!quotesLoaded) return;
       localStorage.setItem("openedCookie", id);
       await breakCookie(id);
     });
