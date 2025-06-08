@@ -46,7 +46,15 @@ Dieser Zusatz half, schneller ans Ziel zu kommen, da wir so vermeintliche „Mis
 
 Des Weiteren half es auch, sich von ChatGPT zuerst nochmals die Logik des Codes erklären zu lassen, auch um zu überprüfen, ob er den Ablauf und den gewollten Ablauf verstanden hat.
 
-Welche weiteren Prompts? _(Hier kannst du ergänzen)_
+Welche weiteren Prompts?
+**Positivbeispiel**
+**Prompt**: du bist informatiker und hilfst mir meinen css code zu analysieren und aufzuräumen. schaue ihn dir bitte an, schaue ob er sinn macht und logisch strukturiert ist. es sollen keine codes drin sei die sich wiederholen (ausser es ist wichtig). der code soll also zusammengefasst werden, so übersichtlich wie möglich sein und es soll kein unnötiger code drin sein. ich schicke dir zuerst mein css für die desktop ansicht, danach die media queries. hier mein css:
+**Fazit**: Die Antwort darauf war gut, weil mir ChatGPT kurz und knapp unser CSS durchgegangen ist und uns gezeigt hat was alles angepasst,zusammengefasst oder gelöschr werden kann.
+
+**Negativbeispiel**
+**Prompt**: Du:
+du bist informatiker und programmierst websites. du hilfst mir bei meiner website "fortune cookies 3000". Ich erkläre dir zuerst den Sinn bzw. das was passieren soll: Ich habe auf meiner Website in der <main> section 3 fortune cookies, einen links, einen in der mitte und einen rechts, alle 3 sind anwählbar. den hover effekt habe ich bereits in meinem css file erstellt. man kann einmal täglich, einer der drei cookies anklicken. beim klicken, rutsch der cookie in die mitte der section, zerbricht in zwei hälften, beide hälften gehen auseinander und es erscheint bzw. zieht in der mitte der zwei keckshälften einen weissen zettel hervor mit einem text-quote, welcher aus einer von 3 apis gefetcht wurde (south park api, game of thrones api und advice api). die cookie animation auf der desktop ansicht funktioniert soweit. jetzt geht es darum die animation responsive zu machen bzw. soll es in der mobilansicht etwas anders aussehen. das prinzip bleibt gleich, jedoch ist bei der mobilen ansicht jeweils nur ein cookie sichtbar, um die anderen zu sehen, kann man nach horiziontal hin und her swipen. die klick-animation und alle restlichen abläufe bleiben dann gleich, das aufbrechen des cookies muss allenfalls visuell noch responsive gemacht werden also dass der Zettel mit dem Quote und die beiden Cookie Hälften dem Screen entsprechend angepasst sind von der Grösse. In CSS habe ich nun einen Scroll Effekt erstellt, meine erste frage wäre hier jedoch, wie ich einen swipe effekt hinbekomme? brauche ich dazu javascript? bevor du mir antwortest, hast du alles verstanden? brauchst du allenfalls mein css?
+**Fazit**: Auf diesen Prompt hat mir Chatgpt zuerst positiv geantwortet und mir gute Antworten geliefert. Als ich dann nachträglich mein JavaScript geschickt habe,hat Chatgpt komplett vergessen was er mit dem Code tun sollte und in mir einfach analysiert anstatt antworten zu liefern.
 
 Ein weiteres Hilfsmittel war natürlich unser Figma-Projekt mit unserem UX Design für die Website.
 
