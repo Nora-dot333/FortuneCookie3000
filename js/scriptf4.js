@@ -28,7 +28,7 @@ localStorage.setItem("quote_last_cleared_month", "2025-05");*/
 
 const lastClearedMonth = localStorage.getItem("quote_last_cleared_month");
 
-function deleteOldQuotes() {
+function clearOldQuotesFromLocalStorage() {
   const validPrefix = "quote_";
   const validDates = [];
 
@@ -57,7 +57,7 @@ function deleteOldQuotes() {
 }
 
 if (lastClearedMonth !== currentMonthYear) {
-  deleteOldQuotes();
+  clearOldQuotesFromLocalStorage();
 }
 
 //Überprüfung, ob am heutigen Datum bereits Quotes abgespeichert
@@ -100,7 +100,7 @@ async function loadQuote(url) {
   }
 }
 
-async function loadandStoreQuotes() {
+async function loadAndStoreQuotes() {
   const quote_1 = await loadQuote(
     "https://api.gameofthronesquotes.xyz/v1/random"
   );
@@ -108,7 +108,7 @@ async function loadandStoreQuotes() {
   const quotes_3 = await loadQuote(
     "https://southparkquotes.onrender.com/v1/quotes/3"
   );
-  const quote_3 = quotes_3[0];
+  const quote_3 = quotes_3 ? quotes_3[0] : null;
 
   if (quote_1) {
     localStorage.setItem(`quote_GoT_${formattedDate}`, JSON.stringify(quote_1));
@@ -124,7 +124,6 @@ async function loadandStoreQuotes() {
   }
 
   if (quote_3) {
-    const quote_3 = quotes_3[0];
     localStorage.setItem(
       `quote_southpark_${formattedDate}`,
       JSON.stringify(quote_3)
@@ -142,9 +141,8 @@ async function loadandStoreQuotes() {
 
 // Prüfen, ob Quotes für heute vorhanden
 if (!quotesAreValidForToday()) {
-  localStorage.removeItem("openedCookie");
   localStorage.setItem("openedCookie", "");
-  loadandStoreQuotes();
+  loadAndStoreQuotes();
 } else {
   const quote1 = localStorage.getItem(`quote_GoT_${formattedDate}`);
   const quote2 = localStorage.getItem(`quote_advice_${formattedDate}`);
@@ -155,7 +153,7 @@ if (!quotesAreValidForToday()) {
   console.log("Quote South Park:", quote3);
 }
 
-//////////////////Break the Cookie////////////////////////////
+//////////////////Cookie Zerbrechen und Quote anzeigen////////////////////////////
 
 async function breakCookie(id) {
   const cookieIds = ["leftcookie", "middlecookie", "rightcookie"];
@@ -167,7 +165,9 @@ async function breakCookie(id) {
   cookieIds.forEach((otherId) => {
     if (otherId !== id) {
       const otherCookie = document.getElementById(otherId);
-      if (otherCookie) otherCookie.style.visibility = "hidden";
+      if (otherCookie) {
+        otherCookie.style.visibility = "hidden";
+     }
     }
   });
 
@@ -178,9 +178,12 @@ async function breakCookie(id) {
   animatedCookie.style.left = "50%";
   animatedCookie.style.transform = "translate(-50%, -50%)";
   animatedCookie.style.zIndex = "10";
-  animatedCookie.style.width = "30%"; // gleiche Größe wie Original
+  animatedCookie.style.width = "30%"; 
   container.appendChild(animatedCookie);
 
+ const isMobile = window.innerWidth <= 768;
+
+ if (!isMobile){
   // Animation je nach Cookie-ID zuweisen
   if (id === "leftcookie") {
     animatedCookie.style.animation = "leftToCenter 0.7s ease forwards";
@@ -189,9 +192,8 @@ async function breakCookie(id) {
   } else if (id === "middlecookie") {
     animatedCookie.style.animation = "middlePop 0.6s ease forwards";
   }
-
-  const isMobile = window.innerWidth <= 768;
-  animatedCookie.style.animation = isMobile;
+} else{
+    //mobile Animationen
   if (id === "leftcookie") {
     animatedCookie.style.animation = "leftToCenterMobile 0.7s ease forwards";
   } else if (id === "rightcookie") {
@@ -199,6 +201,7 @@ async function breakCookie(id) {
   } else if (id === "middlecookie") {
     animatedCookie.style.animation = "middlePopMobile 0.6s ease forwards";
   }
+}
 
   // Originale Cookies entfernen/verstecken
   cookie.style.visibility = "hidden";
@@ -225,21 +228,16 @@ async function breakCookie(id) {
 
   // Schritt 1: Hole das zugehörige Quote aus dem LocalStorage
   let quoteText = "";
+
   if (id === "leftcookie") {
-    const quote = JSON.parse(
-      localStorage.getItem(`quote_GoT_${formattedDate}`)
-    );
-    quoteText = quote?.sentence || quote?.character?.name || "Zitat fehlt.";
+    const quote = JSON.parse(localStorage.getItem(`quote_GoT_${formattedDate}`));
+    quoteText = quote?.sentence || quote?.character?.name || "Zitat kann nicht angezeigt werden.";
   } else if (id === "middlecookie") {
-    const quote = JSON.parse(
-      localStorage.getItem(`quote_advice_${formattedDate}`)
-    );
-    quoteText = quote?.slip?.advice || "Zitat fehlt.";
+    const quote = JSON.parse(localStorage.getItem(`quote_advice_${formattedDate}`));
+    quoteText = quote?.slip?.advice || "Zitat kann nicht angezeigt werden.";
   } else if (id === "rightcookie") {
-    const quote = JSON.parse(
-      localStorage.getItem(`quote_southpark_${formattedDate}`)
-    );
-    quoteText = quote?.quote || "Zitat fehlt.";
+    const quote = JSON.parse(localStorage.getItem(`quote_southpark_${formattedDate}`));
+    quoteText = quote?.quote || "Zitat kann nicht angezeigt werden.";
   }
 
   // Schritt 2: Erstelle den Zettel (fortune-paper)
@@ -261,11 +259,11 @@ async function breakCookie(id) {
 
     // Linke Hälfte links vom Zettel positionieren
     leftHalf.style.left = `calc(50% - ${paperActualWidth / 2}px)`;
-    leftHalf.style.transform = `translate(-100%, -50%) rotate(-20deg)`;
+    leftHalf.style.transform = "translate(-100%, -50%) rotate(-20deg)";
 
     // Rechte Hälfte rechts vom Zettel positionieren
     rightHalf.style.left = `calc(50% + ${paperActualWidth / 2}px)`;
-    rightHalf.style.transform = `translate(0%, -50%) rotate(20deg)`;
+    rightHalf.style.transform = "translate(0%, -50%) rotate(20deg)";
 
     // Start Animation
     leftHalf.classList.add("animate-left");
@@ -277,7 +275,7 @@ async function breakCookie(id) {
       quoteTextElem.className = "fortune-text";
       quoteTextElem.textContent = quoteText;
       paper.appendChild(quoteTextElem);
-    }, 50);
+    }, 1500);
   });
 }
 
@@ -309,59 +307,59 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   //////////////////////Burgermenu///////////////////////////////////////////
+
   function smoothScroll(target) {
-    const targetPosition =
-      target.getBoundingClientRect().top + window.pageYOffset;
-    const startPosition = window.pageYOffset;
-    const distance = targetPosition - startPosition;
-    const duration = 600;
-    let start = null;
+ 
+  const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+  const startPosition = window.pageYOffset;
+  const distance = targetPosition - startPosition;
+  const duration = 600;
+  let startTime = null;
 
-    function step(timestamp) {
-      if (!start) start = timestamp;
-      const progress = timestamp - start;
-      const ease = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t); // easeInOutQuad
-      const timeFraction = Math.min(progress / duration, 1);
-      const easedProgress = ease(timeFraction);
-      window.scrollTo(0, startPosition + distance * easedProgress);
-      if (progress < duration) {
-        requestAnimationFrame(step);
-      }
+  function ease(t) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  }
+
+  function animationStep(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const elapsed = timestamp - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const easedProgress = ease(progress);
+    window.scrollTo(0, startPosition + distance * easedProgress);
+
+    if (elapsed < duration) {
+      requestAnimationFrame(animationStep);
     }
-
-    requestAnimationFrame(step);
   }
+  requestAnimationFrame(animationStep);
+}
 
-  const burger = document.getElementById("burger");
-  const navLinks = document.getElementById("nav-links");
+const burger = document.getElementById("burger");
+const navLinks = document.getElementById("nav-links");
 
-  if (burger && navLinks) {
-    // Burger Menü toggeln
-    burger.addEventListener("click", () => {
-      burger.classList.toggle("active"); // Icon zum X
-      navLinks.classList.toggle("show"); // Menü öffnen/schließen
+if (burger && navLinks) {
+  burger.addEventListener("click", () => {
+    burger.classList.toggle("active");
+    navLinks.classList.toggle("show");
+  });
+
+  const specialLinks = navLinks.querySelectorAll(
+    'a[href="#Calender"], a[href="#fortunecookies"]'
+  );
+
+  specialLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      burger.classList.remove("active");
+      navLinks.classList.remove("show");
+
+      const targetId = link.getAttribute("href");
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        smoothScroll(targetElement);
+      }
     });
-
-    // Nur die zwei Links "Calender" und "Cookie Time" abgreifen
-    const specialLinks = navLinks.querySelectorAll(
-      'a[href="#Calender"], a[href="#fortunecookies"]'
-    );
-
-    specialLinks.forEach((link) => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault(); // Standard-Sprung verhindern
-
-        // Menü schließen
-        burger.classList.remove("active");
-        navLinks.classList.remove("show");
-
-        // Sanft scrollen zur Sektion mit eigener Animation
-        const targetId = link.getAttribute("href");
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          smoothScroll(targetElement);
-        }
-      });
-    });
-  }
+  });
+}
 });
