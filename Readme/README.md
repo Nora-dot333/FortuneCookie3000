@@ -27,7 +27,6 @@ Technisch gesehen fand ich es am schwierigsten, die Animationen für das Zerbrec
 ### Alyah
 
 Das Modul hat mich in diesem Semester positiv überrascht – vor allem, weil ich wirklich motiviert war, unser Projekt umzusetzen. Im Vergleich zum ersten Semester sind mir viele Dinge klarer geworden, insbesondere im Verständnis vom und praktischen Umgang mit Code, Figma UX Design und der Planung von Abläufen.
-
 Wie Nora habe ich gelernt, wie man APIs nutzt, Daten lokal speichert, Nutzerinteraktionen verfolgt und eine eigene Domain einrichtet. Besonders deutlich wurde mir, wie wichtig es ist, beim Programmieren logisch zu denken. Wir haben unseren Ablauf zu Beginn strukturiert, sind während der Umsetzung jedoch immer wieder vor Herausforderungen gestanden an denen wir dann etwas länger sassen. Es war auch schwierig manchmal zu merken, wann wir etwas unnötig kompliziert gecodet haben oder wann nur etwas kleines wie eine Klammer fehlte, die den Code dann wieder zum laufen gebracht hat.
 Beim nächsten Mal würde ich einige Funktionen vereinfachen und den Projektumfang simpler planen.
 Insgesamt war die Website eine wertvolle Erfahrung, aus der ich viel mitgenommen habe. Gleichzeitig hätte ich mir gewünscht, noch mehr JavaScript im Detail zu lernen. Für die Zukunft hoffe ich, unabhängiger von Hilfsmitteln wie ChatGPT arbeiten zu können und ein besseres technisches Grundverständnis aufzubauen
