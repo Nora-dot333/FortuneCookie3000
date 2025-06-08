@@ -35,25 +35,18 @@ h1 {
     -1px 0px 0 black;
   font-size: 8rem;
 }
-/* Layout */
+
 .whole_grid {
   display: grid;
-  grid-template-rows: 130px 100vh 100vh 100vh 130px; /* 5 Reihen */
-  grid-template-areas:
-    "nav"
-    "header"
-    "fortunecookies"
-    "Calender"
-    "footer";
+  grid-template-rows: 130px 100vh 100vh 100vh 130px; 
   min-height: 100vh;
   max-width: 100%;
 }
 
 main {
-  display: contents; /*macht das section direkte Kinder von grid und nicht main */
+  display: contents;
 }
 
-/*Navigation*/
 nav,
 footer {
   background-color: #eb7a6a;
@@ -77,25 +70,24 @@ nav ul {
 .buttonnav {
   background-color: #f8f0eb;
   border: 2px solid #9f1c2e;
-  border-radius: 30px; /* Runde Ecken */
+  border-radius: 30px; 
   width: 17vw;
   max-width: 500px;
   height: 5vh;
   max-height: 300px;
   font-weight: bold;
   cursor: pointer;
-  user-select: none; /* Verhindert Markieren/Kopieren */
+  user-select: none; 
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.3s ease; /*Hover*/
+  transition: background-color 0.3s ease; 
 }
 
 .buttonnav:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-/*Header*/
 .headerhomepage {
   display: flex;
   flex-direction: column;
@@ -115,6 +107,7 @@ nav ul {
 .getlucky {
   padding-bottom: 3rem;
 }
+
 /* Fortune Cookie Section*/
 .FortuneCookies {
   background-color: #9f1c2e;
@@ -141,7 +134,7 @@ nav ul {
 }
 
 .imgcookies img
-#leftcookie, /*Cookie IDs für Javascript*/
+#leftcookie, 
 #middlecookie,
 #rightcookie {
   transition: transform 0.3s ease;
@@ -153,7 +146,6 @@ nav ul {
   transform: scale(1.2);
 }
 
-/*Kalender Section*/
 .Calender {
   margin-top: 40vh;
   height: 60%;
@@ -161,7 +153,6 @@ nav ul {
   font-size: 3rem;
 }
 
-/*Footer*/
 footer {
   border-top: 2px solid #000000;
   flex-direction: row;
@@ -174,11 +165,11 @@ footer img {
   height: 8rem;
 }
 
+
 /* Animationen für JavaScript - Cookie Breaks*/
-/*Cookies sliden beim Klick zuerst in Mitte*/
 @keyframes leftToCenter {
   0% {
-    transform: translate(-150%, -50%) rotate(-15deg);
+    transform: translate(-150%, -50%) rotate(-10deg);
     opacity: 0;
   }
   100% {
@@ -189,7 +180,7 @@ footer img {
 
 @keyframes rightToCenter {
   0% {
-    transform: translate(150%, -50%) rotate(15deg);
+    transform: translate(150%, -50%) rotate(10deg);
     opacity: 0;
   }
   100% {
@@ -207,14 +198,13 @@ footer img {
   }
 }
 
-/*Cookie Hälften Position*/
 @keyframes cookieSplitLeft {
   0% {
     transform: translate(-50%, -50%) rotate(0);
     opacity: 0;
   }
   100% {
-    transform: translate(calc(-50% - var(--offset, 100px)), -50%) rotate(-20deg);
+    transform: translate(calc(-50% - var(--offset, 100px)), -50%) rotate(-15deg);
     opacity: 1;
   }
 }
@@ -225,38 +215,31 @@ footer img {
     opacity: 0;
   }
   100% {
-    transform: translate(calc(-50% + var(--offset, 100px)), -50%) rotate(20deg);
+    transform: translate(calc(-50% + var(--offset, 100px)), -50%) rotate(15deg);
     opacity: 1;
   }
 }
 
-/*Cookie Split: Styling und Animation der Elemente*/
 .cookie-half {
   width: 15%;
   position: absolute;
   top: 50%;
-  left: 50%; /* Beide starten bei 50% links */
-  transform: translate(
-    -50%,
-    -50%
-  ); /* Zentriert das Element genau in der Mitte */
+  left: 50%; 
+  transform: translate(-50%,-50%); 
   z-index: 9;
   pointer-events: none;
-  opacity: 1; /* Sichtbar machen */
+  opacity: 1;
   transition: transform 1.2s ease;
 }
 
-/* Animation für linke Hälfte */
 .cookie-half.animate-left {
   animation: cookieSplitLeft 1.2s ease forwards;
 }
 
-/* Animation für rechte Hälfte */
 .cookie-half.animate-right {
   animation: cookieSplitRight 1.2s ease forwards;
 }
 
-/* Animierter Zettel */
 .fortune-paper {
   position: absolute;
   top: 50%;
@@ -278,6 +261,12 @@ footer img {
   animation-delay: 0.3s;
 }
 
+.fortune-text {
+  font-size: 1.3rem;
+  color: black;
+  text-align: center;
+}
+
 @keyframes growPaper {
   0% {
     transform: translate(-50%, -50%) scaleX(0.1);
@@ -289,14 +278,17 @@ footer img {
   }
 }
 
-.fortune-text {
-  font-size: 1.3rem;
-  color: black;
-  text-align: center;
-}
+
+
 
 @media (max-width: 992px) {
-  /*Burger Menu*/
+ 
+  h1 {
+    font-size: 6rem;
+  }
+  
+
+/*Burgermenu*/
   .burger {
     display: flex;
     flex-direction: column;
@@ -316,7 +308,7 @@ footer img {
     transition: all 0.4s ease;
     transform-origin: center;
   }
-  /*Navigation Mobile Overlay*/
+
   .nav-links {
     display: none;
     position: fixed;
@@ -336,7 +328,6 @@ footer img {
     display: flex;
   }
 
-  /*Burger Animation*/
   .burger.active .line:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
   }
@@ -349,7 +340,7 @@ footer img {
     transform: rotate(-45deg) translate(8.5px, -8.5px);
   }
 }
-/*Button Navigation*/
+
 .buttonnav {
   width: 200px;
 }
@@ -358,31 +349,35 @@ footer img {
   font-size: 1em;
 }
 
+
+/*Fortune Cookie Section*/ 
+.fortune-paper {
+  max-width: 50vw;
+}
+
+.fortune-text {
+  font-size: 1.3rem;
+}
+
+
+
+
 @media (max-width: 768px) {
   p {
     font-size: 1.1rem;
   }
 
   h1 {
-    font-size: 5rem;
+    font-size: 4rem;
+    margin-bottom: 10rem;
   }
   h2 {
     font-size: 3rem;
   }
 
-  /* Anpassungen für Grid in kleiner Ansicht */
   .whole_grid {
-    display: grid;
-    grid-template-rows: 130px 60vh 95vh 95vh 130px; /* 5 Reihen */
-    grid-template-areas:
-      "nav"
-      "header"
-      "fortunecookies"
-      "Calender"
-      "footer";
-    min-height: 100vh;
-    max-width: 100%;
-  }
+    grid-template-rows: 130px 60vh 95vh 95vh 130px;
+      }
 
   nav {
     padding: 4rem;
@@ -402,17 +397,21 @@ footer img {
     width: 6rem;
   }
 
-  /*Cookie Animation*/
-  .imgcookies img {
-    width: 30%;
-    transition: transform 0.5s ease-in-out;
+  /* Animationen für JavaScript - Cookie Breaks*/
+  .imgcookies {
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
   }
-  .cookie-half {
-    width: 40vw; /* Breiter, aber relativ zum Viewport */
-    max-width: 150px; /* Max-Größe für bessere Kontrolle */
-    top: 50%; /* Etwas höher positionieren */
-    left: 5%;
+
+    .fortune-paper {
+    max-width: 40vw;
   }
+
+  .fortune-text {
+    font-size: 1rem;
+  }
+
 
   @keyframes cookieSplitLeft {
     0% {
@@ -420,8 +419,8 @@ footer img {
       opacity: 0;
     }
     100% {
-      transform: translate(calc(-10% - var(--offset, 100px)), -50%)
-        rotate(-20deg);
+      transform: translate(calc(5% - var(--offset, 100px)), -50%)
+        rotate(-15deg);
       opacity: 1;
     }
   }
@@ -432,63 +431,39 @@ footer img {
       opacity: 0;
     }
     100% {
-      transform: translate(calc(-110% + var(--offset, 100px)), -50%)
-        rotate(20deg);
+      transform: translate(calc(-125% + var(--offset, 100px)), -50%)
+        rotate(15deg);
       opacity: 1;
     }
   }
 
-  .fortune-paper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scaleX(0);
-    background: white;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    z-index: 8;
-    min-width: 150px;
-    max-width: 60vw;
-    min-height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    opacity: 0;
-    animation: growPaper 1.2s ease forwards;
-    animation-delay: 0.3s;
-  }
-
-  .fortune-text {
-    font-size: 1.5rem; /* Etwas kleiner auf kleinen Displays */
-  }
-
   @keyframes leftToCenterMobile {
     0% {
+      transform: translate(-50%, -150%) rotate(-15deg);
       opacity: 0;
     }
     100% {
-      transform: scale(1);
+      transform: translate(-50%, -50%) scale(1.2);
       opacity: 1;
     }
   }
 
   @keyframes rightToCenterMobile {
     0% {
+      transform: translate(-50%, 150%) rotate(15deg);
       opacity: 0;
     }
     100% {
-      transform: scale(1);
+      transform: translate(-50%, -50%) scale(1.2);
       opacity: 1;
     }
   }
-
   @keyframes middlePopMobile {
     0% {
-      transform: scale(0.9);
+      transform: translate(-50%, -50%) scale(1);
     }
     100% {
-      transform: scale(1);
+      transform: translate(-50%, -50%) scale(1.3);
     }
   }
 }

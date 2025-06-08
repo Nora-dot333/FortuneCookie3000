@@ -17,6 +17,7 @@ if (dateElement) {
   });
 }
 
+
 // Funktion: Lösche alle Quotes bei Monatswechsel -> bei jedem Aufruf wird überprüft, neuer Monat & Quotes gelösch oder nicht
 
 /* //Testdaten für Clean-Up -> wenn aktiv kann kurz austesten, ob Funktion funktioniert//
@@ -60,7 +61,8 @@ if (lastClearedMonth !== currentMonthYear) {
   clearOldQuotesFromLocalStorage();
 }
 
-//Überprüfung, ob am heutigen Datum bereits Quotes abgespeichert
+
+
 function quotesAreValidForToday() {
   const storedDates = JSON.parse(localStorage.getItem("quote_dates")) || [];
   if (!storedDates.includes(formattedDate)) return false;
@@ -88,7 +90,7 @@ function quotesAreValidForToday() {
   }
 }
 
-//Laden und Speichern API's
+
 
 async function loadQuote(url) {
   try {
@@ -139,7 +141,8 @@ async function loadAndStoreQuotes() {
   }
 }
 
-// Prüfen, ob Quotes für heute vorhanden
+
+
 if (!quotesAreValidForToday()) {
   localStorage.setItem("openedCookie", "");
   loadAndStoreQuotes();
@@ -153,6 +156,8 @@ if (!quotesAreValidForToday()) {
   console.log("Quote South Park:", quote3);
 }
 
+
+
 //////////////////Cookie Zerbrechen und Quote anzeigen////////////////////////////
 
 async function breakCookie(id) {
@@ -161,7 +166,6 @@ async function breakCookie(id) {
   const cookie = document.getElementById(id);
   if (!cookie || !container) return;
 
-  // Alle anderen Cookies ausblenden
   cookieIds.forEach((otherId) => {
     if (otherId !== id) {
       const otherCookie = document.getElementById(otherId);
@@ -171,7 +175,7 @@ async function breakCookie(id) {
     }
   });
 
-  // Klone das Cookie-Bild als neues Element zur Animation
+  
   const animatedCookie = cookie.cloneNode(true);
   animatedCookie.style.position = "absolute";
   animatedCookie.style.top = "50%";
@@ -183,9 +187,9 @@ async function breakCookie(id) {
 
   const isMobile = window.innerWidth <= 768;
 
-  // Animation je nach Cookie-ID zuweisen
+ 
   if (isMobile) {
-    // Mobile Animationen
+    
     if (id === "leftcookie") {
       animatedCookie.style.animation = "leftToCenterMobile 0.7s ease forwards";
     } else if (id === "rightcookie") {
@@ -194,7 +198,7 @@ async function breakCookie(id) {
       animatedCookie.style.animation = "middlePopMobile 0.6s ease forwards";
     }
   } else {
-    // Desktop Animationen
+    
     if (id === "leftcookie") {
       animatedCookie.style.animation = "leftToCenter 0.7s ease forwards";
     } else if (id === "rightcookie") {
@@ -204,16 +208,16 @@ async function breakCookie(id) {
     }
   }
 
-  // Originale Cookies entfernen/verstecken
+
   cookie.style.visibility = "hidden";
 
-  //Warte auf Animationsende
+ 
   await new Promise((resolve) => setTimeout(resolve, 700));
 
-  // Entferne das animierte Cookie-Bild
+  
   animatedCookie.remove();
 
-  // Zeige die zerbrochenen Hälften
+  
   const leftHalf = document.createElement("img");
   leftHalf.src = "img/FortuneCookieLeft.svg";
   leftHalf.alt = "Linke Hälfte";
@@ -227,7 +231,8 @@ async function breakCookie(id) {
   container.appendChild(leftHalf);
   container.appendChild(rightHalf);
 
-  // Schritt 1: Hole das zugehörige Quote aus dem LocalStorage
+
+
   let quoteText = "";
 
   if (id === "leftcookie") {
@@ -250,36 +255,36 @@ async function breakCookie(id) {
     quoteText = quote?.quote || "Zitat kann nicht angezeigt werden.";
   }
 
-  // Schritt 2: Erstelle den Zettel (fortune-paper)
+  
   const paper = document.createElement("div");
   paper.className = "fortune-paper";
   paper.textContent = "";
   container.appendChild(paper);
 
-  // Schritt 3: Setze Breite dynamisch basierend auf Textlänge
+  
   const paperWidth = Math.min(
     quoteText.length * 8 + 100,
     window.innerWidth * 0.6
   );
   paper.style.width = `${paperWidth}px`;
 
-  // Schritt 4: Warte auf Rendering, um tatsächliche Breite zu bekommen
+ 
   requestAnimationFrame(() => {
     const paperActualWidth = paper.offsetWidth;
 
-    // Linke Hälfte links vom Zettel positionieren
+   
     leftHalf.style.left = `calc(50% - ${paperActualWidth / 2}px)`;
     leftHalf.style.transform = "translate(-100%, -50%) rotate(-20deg)";
 
-    // Rechte Hälfte rechts vom Zettel positionieren
+    
     rightHalf.style.left = `calc(50% + ${paperActualWidth / 2}px)`;
     rightHalf.style.transform = "translate(0%, -50%) rotate(20deg)";
 
-    // Start Animation
+
     leftHalf.classList.add("animate-left");
     rightHalf.classList.add("animate-right");
 
-    // Schritt 5: Quote erscheint 1.5s nach Zettel-Erscheinen
+
     setTimeout(() => {
       const quoteTextElem = document.createElement("div");
       quoteTextElem.className = "fortune-text";
@@ -289,6 +294,8 @@ async function breakCookie(id) {
   });
 }
 
+
+
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("Script läuft – Fortune Cookie Animation Etappe 1");
 
@@ -296,14 +303,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   const openedCookie = localStorage.getItem("openedCookie");
 
   if (openedCookie) {
-    // Hide other cookies
     cookieIds.forEach((cookieId) => {
       if (cookieId !== openedCookie) {
         const cookie = document.getElementById(cookieId);
         if (cookie) cookie.style.visibility = "hidden";
       }
     });
-    // Call breakCookie for the opened cookie
+
     await breakCookie(openedCookie);
   }
 
@@ -315,6 +321,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       await breakCookie(id);
     });
   });
+
+  
 
   //////////////////////Burgermenu///////////////////////////////////////////
 
