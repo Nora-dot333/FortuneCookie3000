@@ -88,8 +88,6 @@ function quotesAreValidForToday() {
   }
 }
 
-
-
 //Laden und Speichern API's
 
 async function loadQuote(url) {
@@ -169,7 +167,7 @@ async function breakCookie(id) {
       const otherCookie = document.getElementById(otherId);
       if (otherCookie) {
         otherCookie.style.visibility = "hidden";
-     }
+      }
     }
   });
 
@@ -180,30 +178,31 @@ async function breakCookie(id) {
   animatedCookie.style.left = "50%";
   animatedCookie.style.transform = "translate(-50%, -50%)";
   animatedCookie.style.zIndex = "10";
-  animatedCookie.style.width = "30%"; 
+  animatedCookie.style.width = "30%";
   container.appendChild(animatedCookie);
 
- const isMobile = window.innerWidth <= 768;
+  const isMobile = window.innerWidth <= 768;
 
- if (!isMobile){
   // Animation je nach Cookie-ID zuweisen
-  if (id === "leftcookie") {
-    animatedCookie.style.animation = "leftToCenter 0.7s ease forwards";
-  } else if (id === "rightcookie") {
-    animatedCookie.style.animation = "rightToCenter 0.7s ease forwards";
-  } else if (id === "middlecookie") {
-    animatedCookie.style.animation = "middlePop 0.6s ease forwards";
+  if (isMobile) {
+    // Mobile Animationen
+    if (id === "leftcookie") {
+      animatedCookie.style.animation = "leftToCenterMobile 0.7s ease forwards";
+    } else if (id === "rightcookie") {
+      animatedCookie.style.animation = "rightToCenterMobile 0.7s ease forwards";
+    } else if (id === "middlecookie") {
+      animatedCookie.style.animation = "middlePopMobile 0.6s ease forwards";
+    }
+  } else {
+    // Desktop Animationen
+    if (id === "leftcookie") {
+      animatedCookie.style.animation = "leftToCenter 0.7s ease forwards";
+    } else if (id === "rightcookie") {
+      animatedCookie.style.animation = "rightToCenter 0.7s ease forwards";
+    } else if (id === "middlecookie") {
+      animatedCookie.style.animation = "middlePop 0.6s ease forwards";
+    }
   }
-} else{
-    //mobile Animationen
-  if (id === "leftcookie") {
-    animatedCookie.style.animation = "leftToCenterMobile 0.7s ease forwards";
-  } else if (id === "rightcookie") {
-    animatedCookie.style.animation = "rightToCenterMobile 0.7s ease forwards";
-  } else if (id === "middlecookie") {
-    animatedCookie.style.animation = "middlePopMobile 0.6s ease forwards";
-  }
-}
 
   // Originale Cookies entfernen/verstecken
   cookie.style.visibility = "hidden";
@@ -232,13 +231,22 @@ async function breakCookie(id) {
   let quoteText = "";
 
   if (id === "leftcookie") {
-    const quote = JSON.parse(localStorage.getItem(`quote_GoT_${formattedDate}`));
-    quoteText = quote?.sentence || quote?.character?.name || "Zitat kann nicht angezeigt werden.";
+    const quote = JSON.parse(
+      localStorage.getItem(`quote_GoT_${formattedDate}`)
+    );
+    quoteText =
+      quote?.sentence ||
+      quote?.character?.name ||
+      "Zitat kann nicht angezeigt werden.";
   } else if (id === "middlecookie") {
-    const quote = JSON.parse(localStorage.getItem(`quote_advice_${formattedDate}`));
+    const quote = JSON.parse(
+      localStorage.getItem(`quote_advice_${formattedDate}`)
+    );
     quoteText = quote?.slip?.advice || "Zitat kann nicht angezeigt werden.";
   } else if (id === "rightcookie") {
-    const quote = JSON.parse(localStorage.getItem(`quote_southpark_${formattedDate}`));
+    const quote = JSON.parse(
+      localStorage.getItem(`quote_southpark_${formattedDate}`)
+    );
     quoteText = quote?.quote || "Zitat kann nicht angezeigt werden.";
   }
 
@@ -311,57 +319,57 @@ document.addEventListener("DOMContentLoaded", async () => {
   //////////////////////Burgermenu///////////////////////////////////////////
 
   function smoothScroll(target) {
- 
-  const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
-  const startPosition = window.pageYOffset;
-  const distance = targetPosition - startPosition;
-  const duration = 600;
-  let startTime = null;
+    const targetPosition =
+      target.getBoundingClientRect().top + window.pageYOffset;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    const duration = 600;
+    let startTime = null;
 
-  function ease(t) {
-    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-  }
-
-  function animationStep(timestamp) {
-    if (!startTime) startTime = timestamp;
-    const elapsed = timestamp - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const easedProgress = ease(progress);
-    window.scrollTo(0, startPosition + distance * easedProgress);
-
-    if (elapsed < duration) {
-      requestAnimationFrame(animationStep);
+    function ease(t) {
+      return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
     }
-  }
-  requestAnimationFrame(animationStep);
-}
 
-const burger = document.getElementById("burger");
-const navLinks = document.getElementById("nav-links");
+    function animationStep(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = ease(progress);
+      window.scrollTo(0, startPosition + distance * easedProgress);
 
-if (burger && navLinks) {
-  burger.addEventListener("click", () => {
-    burger.classList.toggle("active");
-    navLinks.classList.toggle("show");
-  });
-
-  const specialLinks = navLinks.querySelectorAll(
-    'a[href="#Calender"], a[href="#fortunecookies"]'
-  );
-
-  specialLinks.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-
-      burger.classList.remove("active");
-      navLinks.classList.remove("show");
-
-      const targetId = link.getAttribute("href");
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        smoothScroll(targetElement);
+      if (elapsed < duration) {
+        requestAnimationFrame(animationStep);
       }
+    }
+    requestAnimationFrame(animationStep);
+  }
+
+  const burger = document.getElementById("burger");
+  const navLinks = document.getElementById("nav-links");
+
+  if (burger && navLinks) {
+    burger.addEventListener("click", () => {
+      burger.classList.toggle("active");
+      navLinks.classList.toggle("show");
     });
-  });
-}
+
+    const specialLinks = navLinks.querySelectorAll(
+      'a[href="#Calender"], a[href="#fortunecookies"]'
+    );
+
+    specialLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        burger.classList.remove("active");
+        navLinks.classList.remove("show");
+
+        const targetId = link.getAttribute("href");
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          smoothScroll(targetElement);
+        }
+      });
+    });
+  }
 });
