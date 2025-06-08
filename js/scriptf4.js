@@ -144,7 +144,7 @@ async function loadAndStoreQuotes() {
 // Prüfen, ob Quotes für heute vorhanden
 if (!quotesAreValidForToday()) {
   localStorage.setItem("openedCookie", "");
-  await loadAndStoreQuotes();
+  loadAndStoreQuotes();
 
   const quote1 = localStorage.getItem(`quote_GoT_${formattedDate}`);
   const quote2 = localStorage.getItem(`quote_advice_${formattedDate}`);
