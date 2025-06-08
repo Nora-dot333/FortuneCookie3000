@@ -359,12 +359,15 @@ footer img {
 }
 
 @media (max-width: 768px) {
-  body {
+  p {
     font-size: 1.1rem;
   }
 
   h1 {
     font-size: 5rem;
+  }
+  h2 {
+    font-size: 3rem;
   }
 
   /* Anpassungen für Grid in kleiner Ansicht */
