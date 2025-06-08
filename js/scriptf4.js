@@ -88,6 +88,8 @@ function quotesAreValidForToday() {
   }
 }
 
+let quotesLoaded = false;
+
 //Laden und Speichern API's
 
 async function loadQuote(url) {
@@ -142,8 +144,11 @@ async function loadAndStoreQuotes() {
 // Prüfen, ob Quotes für heute vorhanden
 if (!quotesAreValidForToday()) {
   localStorage.setItem("openedCookie", "");
-  loadAndStoreQuotes();
+  await loadAndStoreQuotes();
 } else {
+
+    quotesLoaded = true;
+
   const quote1 = localStorage.getItem(`quote_GoT_${formattedDate}`);
   const quote2 = localStorage.getItem(`quote_advice_${formattedDate}`);
   const quote3 = localStorage.getItem(`quote_southpark_${formattedDate}`);
@@ -301,6 +306,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const cookie = document.getElementById(id);
     if (!cookie) return;
     cookie.addEventListener("click", async () => {
+        if(!quotesLoaded) return;
       localStorage.setItem("openedCookie", id);
       await breakCookie(id);
     });
