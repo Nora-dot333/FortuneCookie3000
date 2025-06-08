@@ -60,7 +60,6 @@ if (lastClearedMonth !== currentMonthYear) {
   deleteOldQuotes();
 }
 
-
 //Überprüfung, ob am heutigen Datum bereits Quotes abgespeichert
 function quotesAreValidForToday() {
   const storedDates = JSON.parse(localStorage.getItem("quote_dates")) || [];
@@ -83,12 +82,11 @@ function quotesAreValidForToday() {
     if (!quote2.slip?.advice) return false;
     if (!quote3.quote) return false;
 
-    return true; 
+    return true;
   } catch (e) {
-    return false; 
+    return false;
   }
 }
-
 
 //Laden und Speichern API's
 
@@ -105,8 +103,8 @@ async function loadQuote(url) {
 async function loadandStoreQuotes() {
   const quote_1 = await loadQuote(
     "https://api.gameofthronesquotes.xyz/v1/random"
-  ); 
-  const quote_2 = await loadQuote("https://api.adviceslip.com/advice"); 
+  );
+  const quote_2 = await loadQuote("https://api.adviceslip.com/advice");
   const quotes_3 = await loadQuote(
     "https://southparkquotes.onrender.com/v1/quotes/3"
   );
@@ -134,7 +132,6 @@ async function loadandStoreQuotes() {
     console.log("South Park gespeichert:", quote_3);
   }
 
-  
   let storedDates = JSON.parse(localStorage.getItem("quote_dates")) || [];
 
   if (!storedDates.includes(formattedDate)) {
@@ -149,7 +146,6 @@ if (!quotesAreValidForToday()) {
   localStorage.setItem("openedCookie", "");
   loadandStoreQuotes();
 } else {
-  
   const quote1 = localStorage.getItem(`quote_GoT_${formattedDate}`);
   const quote2 = localStorage.getItem(`quote_advice_${formattedDate}`);
   const quote3 = localStorage.getItem(`quote_southpark_${formattedDate}`);
@@ -192,6 +188,16 @@ async function breakCookie(id) {
     animatedCookie.style.animation = "rightToCenter 0.7s ease forwards";
   } else if (id === "middlecookie") {
     animatedCookie.style.animation = "middlePop 0.6s ease forwards";
+  }
+
+  const isMobile = window.innerWidth <= 768;
+  animatedCookie.style.animation = isMobile;
+  if (id === "leftcookie") {
+    animatedCookie.style.animation = "leftToCenterMobile 0.7s ease forwards";
+  } else if (id === "rightcookie") {
+    animatedCookie.style.animation = "rightToCenterMobile 0.7s ease forwards";
+  } else if (id === "middlecookie") {
+    animatedCookie.style.animation = "middlePopMobile 0.6s ease forwards";
   }
 
   // Originale Cookies entfernen/verstecken
@@ -273,39 +279,6 @@ async function breakCookie(id) {
       paper.appendChild(quoteTextElem);
     }, 50);
   });
-
-  // Schritt 6: Mobile Ansicht Cookie Break
-
-  const isMobile = window.matchMedia("(max-width: 768px)").matches;
-  if (isMobile) {
-    // Füge hier die mobile-spezifischen Styles hinzu, z.B. Klassen
-    leftHalf.classList.add("mobile-scale");
-    rightHalf.classList.add("mobile-scale");
-    paper.classList.add("mobile-scale");
-
-    // Außerdem Swipe deaktivieren (overflow-x verstecken)
-    const slider = document.querySelector(".cookie-slider-wrapper");
-    if (slider) {
-      slider.style.overflowX = "hidden";
-      slider.style.pointerEvents = "none";
-    }
-  }
-  /*Mittel Position nur bei Desktop
-  if (isMobile) {
-    animatedCookie.style.position = "relative"; // oder "static"
-    animatedCookie.style.top = "";
-    animatedCookie.style.left = "";
-    animatedCookie.style.transform = "";
-  }*/
-
-  if (isMobile) {
-    // Mobile: Cookie soll an Ort und Stelle bleiben
-    animatedCookie.style.position = "absolute";
-    animatedCookie.style.top = "initial";
-    animatedCookie.style.left = "initial";
-    animatedCookie.style.transform = "none";
-    animatedCookie.style.animation = "popAtPlace 0.5s ease forwards";
-  }
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -334,48 +307,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       await breakCookie(id);
     });
   });
-
-  ////Swipe Animation Mobile ///////
-
-  const slider = document.querySelector(".cookie-slider-wrapper");
-  if (slider) {
-    let startX = 0;
-    let currentScroll = 0;
-    let isDragging = false;
-
-    slider.addEventListener("touchstart", (e) => {
-      startX = e.touches[0].pageX;
-      currentScroll = slider.scrollLeft;
-      isDragging = true;
-    });
-
-    slider.addEventListener("touchmove", (e) => {
-      if (!isDragging) return;
-      const x = e.touches[0].pageX;
-      const walk = startX - x; // Swipe Distanz
-      slider.scrollLeft = currentScroll + walk;
-    });
-
-    slider.addEventListener("touchend", (e) => {
-      isDragging = false;
-      snapToNearest();
-    });
-
-    function snapToNearest() {
-      const cookie = slider.querySelector("img");
-      if (!cookie) return;
-      const gap = 48;
-      const cookieWidth = cookie.offsetWidth + gap;
-
-      const scrollLeft = slider.scrollLeft;
-      const index = Math.round(scrollLeft / cookieWidth);
-
-      slider.scrollTo({
-        left: index * cookieWidth,
-        behavior: "smooth",
-      });
-    }
-  }
 
   //////////////////////Burgermenu///////////////////////////////////////////
   function smoothScroll(target) {
