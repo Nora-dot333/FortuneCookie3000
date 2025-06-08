@@ -1,5 +1,9 @@
 console.log("hoi script.js");
 
+if (!localStorage.getItem("visited")) {
+  window.location.href = "Starterpage.html";
+}
+
 //////////////////Aktuelles Datum & Fetch and Store APIs //////////////////
 
 const today = new Date();
@@ -16,7 +20,6 @@ if (dateElement) {
     year: "numeric",
   });
 }
-
 
 // Funktion: Lösche alle Quotes bei Monatswechsel -> bei jedem Aufruf wird überprüft, neuer Monat & Quotes gelösch oder nicht
 
@@ -61,8 +64,6 @@ if (lastClearedMonth !== currentMonthYear) {
   clearOldQuotesFromLocalStorage();
 }
 
-
-
 function quotesAreValidForToday() {
   const storedDates = JSON.parse(localStorage.getItem("quote_dates")) || [];
   if (!storedDates.includes(formattedDate)) return false;
@@ -89,8 +90,6 @@ function quotesAreValidForToday() {
     return false;
   }
 }
-
-
 
 async function loadQuote(url) {
   try {
@@ -141,8 +140,6 @@ async function loadAndStoreQuotes() {
   }
 }
 
-
-
 if (!quotesAreValidForToday()) {
   localStorage.setItem("openedCookie", "");
   loadAndStoreQuotes();
@@ -155,8 +152,6 @@ if (!quotesAreValidForToday()) {
   console.log("Quote Advice:", quote2);
   console.log("Quote South Park:", quote3);
 }
-
-
 
 //////////////////Cookie Zerbrechen und Quote anzeigen////////////////////////////
 
@@ -175,7 +170,6 @@ async function breakCookie(id) {
     }
   });
 
-  
   const animatedCookie = cookie.cloneNode(true);
   animatedCookie.style.position = "absolute";
   animatedCookie.style.top = "50%";
@@ -187,9 +181,7 @@ async function breakCookie(id) {
 
   const isMobile = window.innerWidth <= 768;
 
- 
   if (isMobile) {
-    
     if (id === "leftcookie") {
       animatedCookie.style.animation = "leftToCenterMobile 0.7s ease forwards";
     } else if (id === "rightcookie") {
@@ -198,7 +190,6 @@ async function breakCookie(id) {
       animatedCookie.style.animation = "middlePopMobile 0.6s ease forwards";
     }
   } else {
-    
     if (id === "leftcookie") {
       animatedCookie.style.animation = "leftToCenter 0.7s ease forwards";
     } else if (id === "rightcookie") {
@@ -208,16 +199,12 @@ async function breakCookie(id) {
     }
   }
 
-
   cookie.style.visibility = "hidden";
 
- 
   await new Promise((resolve) => setTimeout(resolve, 700));
 
-  
   animatedCookie.remove();
 
-  
   const leftHalf = document.createElement("img");
   leftHalf.src = "img/FortuneCookieLeft.svg";
   leftHalf.alt = "Linke Hälfte";
@@ -230,8 +217,6 @@ async function breakCookie(id) {
 
   container.appendChild(leftHalf);
   container.appendChild(rightHalf);
-
-
 
   let quoteText = "";
 
@@ -255,35 +240,28 @@ async function breakCookie(id) {
     quoteText = quote?.quote || "Zitat kann nicht angezeigt werden.";
   }
 
-  
   const paper = document.createElement("div");
   paper.className = "fortune-paper";
   paper.textContent = "";
   container.appendChild(paper);
 
-  
   const paperWidth = Math.min(
     quoteText.length * 8 + 100,
     window.innerWidth * 0.6
   );
   paper.style.width = `${paperWidth}px`;
 
- 
   requestAnimationFrame(() => {
     const paperActualWidth = paper.offsetWidth;
 
-   
     leftHalf.style.left = `calc(50% - ${paperActualWidth / 2}px)`;
     leftHalf.style.transform = "translate(-100%, -50%) rotate(-20deg)";
 
-    
     rightHalf.style.left = `calc(50% + ${paperActualWidth / 2}px)`;
     rightHalf.style.transform = "translate(0%, -50%) rotate(20deg)";
 
-
     leftHalf.classList.add("animate-left");
     rightHalf.classList.add("animate-right");
-
 
     setTimeout(() => {
       const quoteTextElem = document.createElement("div");
@@ -293,8 +271,6 @@ async function breakCookie(id) {
     }, 1500);
   });
 }
-
-
 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("Script läuft – Fortune Cookie Animation Etappe 1");
@@ -321,8 +297,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       await breakCookie(id);
     });
   });
-
-  
 
   //////////////////////Burgermenu///////////////////////////////////////////
 
