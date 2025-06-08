@@ -1,10 +1,8 @@
 * {
   font-family: "Port Lligat Sans", sans-serif;
-  /*font-weight: 400;*/
   font-style: normal;
   color: black;
   text-decoration: none;
-
   /* Lea's drei Must-Haves */
   margin: 0;
   padding: 0;
@@ -13,6 +11,18 @@
 
 html {
   overflow-x: hidden;
+}
+
+body {
+  background: #f99d90;
+  font-size: 1.7rem;
+}
+
+img {
+  max-width: 100%;
+  display: inline-block;
+  height: auto;
+  background-color: transparent !important;
 }
 
 h1 {
@@ -25,19 +35,7 @@ h1 {
     -1px 0px 0 black;
   font-size: 8rem;
 }
-
-img {
-  max-width: 100%;
-  display: inline-block;
-  height: auto;
-  background-color: transparent !important;
-}
-
-body {
-  background: #f99d90;
-  font-size: 1.7rem;
-}
-
+/* Layout */
 .whole_grid {
   display: grid;
   grid-template-rows: 130px 100vh 100vh 100vh 130px; /* 5 Reihen */
@@ -55,11 +53,17 @@ main {
   display: contents; /*macht das section direkte Kinder von grid und nicht main */
 }
 
-nav {
-  border-bottom: 2px solid #000000;
+/*Navigation*/
+nav,
+footer {
+  background-color: #eb7a6a;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+nav {
+  border-bottom: 2px solid #000000;
 }
 
 nav ul {
@@ -91,6 +95,7 @@ nav ul {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+/*Header*/
 .headerhomepage {
   display: flex;
   flex-direction: column;
@@ -98,16 +103,19 @@ nav ul {
   justify-content: center;
 }
 
+.mainlogo,
+.getlucky {
+  width: 80vw;
+}
+
 .mainlogo {
   padding-top: 3rem;
-  width: 80vw;
 }
 
 .getlucky {
-  width: 80vw;
   padding-bottom: 3rem;
 }
-
+/* Fortune Cookie Section*/
 .FortuneCookies {
   background-color: #9f1c2e;
   padding-top: 0.5rem;
@@ -130,10 +138,10 @@ nav ul {
 
 .imgcookies img {
   width: 30%;
-  transition: transform 0.5s ease-in-out;
 }
 
-#leftcookie,
+.imgcookies img
+#leftcookie, /*Cookie IDs für Javascript*/
 #middlecookie,
 #rightcookie {
   transition: transform 0.3s ease;
@@ -145,19 +153,18 @@ nav ul {
   transform: scale(1.2);
 }
 
+/*Kalender Section*/
 .Calender {
   margin-top: 40vh;
   height: 60%;
-  font-size: 4rem;
   text-align: center;
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
+/*Footer*/
 footer {
   border-top: 2px solid #000000;
-  display: flex;
   flex-direction: row;
-  align-items: center;
   gap: 50%;
   padding: 10px;
 }
@@ -167,13 +174,7 @@ footer img {
   height: 8rem;
 }
 
-nav,
-footer {
-  background-color: #eb7a6a;
-}
-
-/* CSS für JavaScript - Cookie Breaks*/
-
+/* Animationen für JavaScript - Cookie Breaks*/
 /*Cookies sliden beim Klick zuerst in Mitte*/
 @keyframes leftToCenter {
   0% {
@@ -205,23 +206,8 @@ footer {
     transform: translate(-50%, -50%) scale(1.3);
   }
 }
-/*Styling Cookie Hälften*/
-.cookie-half {
-  width: 15%;
-  position: absolute;
-  top: 50%;
-  left: 50%; /* Beide starten bei 50% links */
-  transform: translate(
-    -50%,
-    -50%
-  ); /* Zentriert das Element genau in der Mitte */
-  z-index: 9;
-  pointer-events: none;
-  opacity: 1; /* Sichtbar machen */
-  transition: transform 1.2s ease;
-}
 
-/*Animation Cookie Hälften*/
+/*Cookie Hälften Position*/
 @keyframes cookieSplitLeft {
   0% {
     transform: translate(-50%, -50%) rotate(0);
@@ -242,6 +228,22 @@ footer {
     transform: translate(calc(-50% + var(--offset, 100px)), -50%) rotate(20deg);
     opacity: 1;
   }
+}
+
+/*Cookie Split: Styling und Animation der Elemente*/
+.cookie-half {
+  width: 15%;
+  position: absolute;
+  top: 50%;
+  left: 50%; /* Beide starten bei 50% links */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Zentriert das Element genau in der Mitte */
+  z-index: 9;
+  pointer-events: none;
+  opacity: 1; /* Sichtbar machen */
+  transition: transform 1.2s ease;
 }
 
 /* Animation für linke Hälfte */
@@ -294,12 +296,7 @@ footer {
 }
 
 @media (max-width: 992px) {
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-  }
-
+  /*Burger Menu*/
   .burger {
     display: flex;
     flex-direction: column;
@@ -319,7 +316,7 @@ footer {
     transition: all 0.4s ease;
     transform-origin: center;
   }
-
+  /*Navigation Mobile Overlay*/
   .nav-links {
     display: none;
     position: fixed;
@@ -339,6 +336,7 @@ footer {
     display: flex;
   }
 
+  /*Burger Animation*/
   .burger.active .line:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
   }
@@ -351,16 +349,24 @@ footer {
     transform: rotate(-45deg) translate(8.5px, -8.5px);
   }
 }
-
+/*Button Navigation*/
 .buttonnav {
   width: 200px;
 }
 
 .buttonnav a {
-  font-size: 1 em;
+  font-size: 1em;
 }
 
 @media (max-width: 768px) {
+  body {
+    font-size: 1.1rem;
+  }
+
+  h1 {
+    font-size: 5rem;
+  }
+
   /* Anpassungen für Grid in kleiner Ansicht */
   .whole_grid {
     display: grid;
@@ -373,21 +379,6 @@ footer {
       "footer";
     min-height: 100vh;
     max-width: 100%;
-  }
-
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-  }
-
-  /* Schriftgrößen kleiner machen */
-  h1 {
-    font-size: 5rem;
-  }
-
-  body {
-    font-size: 1.1rem;
   }
 
   nav {
@@ -409,7 +400,6 @@ footer {
   }
 
   /*Cookie Animation*/
-
   .imgcookies img {
     width: 30%;
     transition: transform 0.5s ease-in-out;
@@ -437,14 +427,13 @@ footer {
     0% {
       transform: translate(-50%, -50%) rotate(0);
       opacity: 0;
-    } 
+    }
     100% {
       transform: translate(calc(-110% + var(--offset, 100px)), -50%)
         rotate(20deg);
       opacity: 1;
     }
   }
-
 
   .fortune-paper {
     position: absolute;
@@ -476,7 +465,7 @@ footer {
       opacity: 0;
     }
     100% {
-      transform: scale(1.0);
+      transform: scale(1);
       opacity: 1;
     }
   }
@@ -486,7 +475,7 @@ footer {
       opacity: 0;
     }
     100% {
-      transform: scale(1.0);
+      transform: scale(1);
       opacity: 1;
     }
   }
@@ -496,84 +485,7 @@ footer {
       transform: scale(0.9);
     }
     100% {
-      transform: scale(1.0);
+      transform: scale(1);
     }
   }
 }
-
-/* Mobile Ansicht Swipe 
-  /* Cookie Wrapper damit nur ein Cookie sichtbar bei Swipe 
-  .cookie-slider-wrapper {
-    width: 100vw;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    position: relative;
-    overflow: hidden;
-    padding: 1rem;
-  }
-
-  /* Horizontale Scroll-Fläche 
-  .imgcookies {
-    width: 300%;
-    display: flex;
-    flex-direction: row;
-    gap: 3rem;
-  }
-
-  /* Breite einzelner Cookies 
-  .imgcookies img {
-    width: auto;
-    flex-shrink: 0;
-    scroll-snap-align: center;
-  }
-
-  /* Scrollbar verstecken 
-  .cookie-slider-wrapper::-webkit-scrollbar {
-    display: none;
-  } */
-
-  /*//Swipe Animation Mobile ///////
-
-  const slider = document.querySelector(".cookie-slider-wrapper");
-  if (slider) {
-    let startX = 0;
-    let currentScroll = 0;
-    let isDragging = false;
-
-    slider.addEventListener("touchstart", (e) => {
-      startX = e.touches[0].pageX;
-      currentScroll = slider.scrollLeft;
-      isDragging = true;
-    });
-
-    slider.addEventListener("touchmove", (e) => {
-      if (!isDragging) return;
-      const x = e.touches[0].pageX;
-      const walk = startX - x; // Swipe Distanz
-      slider.scrollLeft = currentScroll + walk;
-    });
-
-    slider.addEventListener("touchend", (e) => {
-      isDragging = false;
-      snapToNearest();
-    });
-
-    function snapToNearest() {
-      const cookie = slider.querySelector("img");
-      if (!cookie) return;
-      const gap = 48;
-      const cookieWidth = cookie.offsetWidth + gap;
-
-      const scrollLeft = slider.scrollLeft;
-      const index = Math.round(scrollLeft / cookieWidth);
-
-      slider.scrollTo({
-        left: index * cookieWidth,
-        behavior: "smooth",
-      });
-    }
-  }
-    const cookieSlider = document.querySelector(".cookie-slider-wrapper");
-  if (cookieSlider) {
-    cookieSlider.style.overflow = "hidden";
-  }
